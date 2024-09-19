@@ -7,10 +7,10 @@ import lombok.Data;
 @Builder
 @Data
 public class Cliente {
-    private String idCliente;
-    private String primeiroNome;
-    private String ultimoNome;
+    private String id_cliente;
+    private String primeiro_nome;
+    private String ultimo_nome;
     private String email;
-    private Endereco endereco;
+    private String endereco;
     private Nivel nivel;
 }
