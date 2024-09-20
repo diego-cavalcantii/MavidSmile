@@ -31,6 +31,5 @@ public class Progresso {
 
 
     private int registros;
-    private LocalDate ultimo_registro;
     private double porcentagem_registros;
 }

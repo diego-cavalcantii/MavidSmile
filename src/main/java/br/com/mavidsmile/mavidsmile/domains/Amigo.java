@@ -14,19 +14,15 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente {
-
+public class Amigo {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id_cliente;
-
-    @OneToOne
-    private Progresso progresso;
+    private String amizade;
 
     @ManyToOne
-    private Nivel nivel;
+    private Cliente ClienteIdEhAmigo;
 
-    private String nome_completo;
-    private String email;
-    private String endereco;
+    @ManyToOne
+    private Cliente ClienteIdTemAmigo;
+
 }
