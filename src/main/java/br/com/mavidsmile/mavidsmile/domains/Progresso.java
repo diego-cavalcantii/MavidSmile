@@ -23,13 +23,10 @@ public class Progresso {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id_progresso;
 
-    @OneToOne
-    private Cliente cliente;
-
     @ManyToOne
     private Nivel nivel;
 
-    @OneToMany
+    @OneToMany(mappedBy = "progresso")
     private List<Premio> premios_recebidos;
 
 

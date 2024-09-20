@@ -21,4 +21,9 @@ public class Premio {
     private String descricao_premio;
     private String fotos_necessarias;
 
+    @ManyToOne
+    private Progresso progresso;
+
+
+
 }
