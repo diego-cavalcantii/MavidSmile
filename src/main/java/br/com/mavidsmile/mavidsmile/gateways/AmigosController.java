@@ -3,6 +3,7 @@ package br.com.mavidsmile.mavidsmile.gateways;
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.PremioDTO;
+import br.com.mavidsmile.mavidsmile.usecases.ExibiListaPremios;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class AmigosController {
 
     private final ClienteRepository clienteRepository;
+    private final ExibiListaPremios exibiListaPremios;
 
 
     @GetMapping("/{clienteId}")
@@ -28,15 +30,6 @@ public class AmigosController {
         if (cliente == null) {
             return ResponseEntity.notFound().build();
         }
-
-        List<PremioDTO> premioDTO = cliente.getProgresso().getPremiosRecebidos().stream()
-                .map(premio -> PremioDTO.builder()
-                        .nomePremio(premio.getPremio().getNomePremio())
-                        .descricaoPremio(premio.getPremio().getDescricaoPremio())
-                        .fotosNecessarias(premio.getPremio().getFotosNecessarias())
-                        .build())
-                .collect(Collectors.toList());
-
         // Extrai a lista de amigos do cliente
         List<ClienteGETResponseDTO> amigosDTO = cliente.getAmigos().stream()
                 .map(amigo -> {
@@ -46,7 +39,7 @@ public class AmigosController {
                             .email(amigoCliente.getEmail())
                             .nomeNivel(amigoCliente.getNivel().getNomeNivel())
                             .email(amigoCliente.getEmail())
-                            .premiosRecebidos(premioDTO)
+                            .premiosRecebidos(exibiListaPremios.exibir(amigoCliente)) // Passa a lista de prêmios
                             .build();
                 })
                 .collect(Collectors.toList());
