@@ -21,5 +21,4 @@ public class Nivel {
     private String idNivel;
     private String nomeNivel;
 
-
 }

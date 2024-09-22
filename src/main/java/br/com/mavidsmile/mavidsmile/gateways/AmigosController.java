@@ -1,18 +1,19 @@
 package br.com.mavidsmile.mavidsmile.gateways;
 
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
+import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmigoRequestDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.PremioDTO;
+import br.com.mavidsmile.mavidsmile.usecases.AdicionarAmigo;
 import br.com.mavidsmile.mavidsmile.usecases.ExibiListaPremios;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/amigos")
@@ -21,7 +22,7 @@ public class AmigosController {
 
     private final ClienteRepository clienteRepository;
     private final ExibiListaPremios exibiListaPremios;
-
+    private final AdicionarAmigo adicionarAmigo;
 
     @GetMapping("/{clienteId}")
     public ResponseEntity<List<ClienteGETResponseDTO>> exibiOsAmigosDeUmCliente(@PathVariable String clienteId) {
@@ -46,4 +47,13 @@ public class AmigosController {
 
         return ResponseEntity.ok(amigosDTO);
     }
+
+    @PostMapping("/adicionar")
+    public ResponseEntity<String> adicionarUmAmigo(@RequestBody AdicionarAmigoRequestDTO requestDTO) {
+        adicionarAmigo.adicionarAmigo(requestDTO);
+        return ResponseEntity.ok("Amigo adicionado com sucesso");
+    }
+
+
+
 }

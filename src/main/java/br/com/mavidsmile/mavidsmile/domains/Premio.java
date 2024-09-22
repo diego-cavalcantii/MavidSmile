@@ -19,6 +19,10 @@ public class Premio {
 
     private String nomePremio;
     private String descricaoPremio;
-    private String fotosNecessarias;
+    private int fotosNecessarias;
+
+    @OneToOne
+    @JoinColumn(name = "idNivel")
+    private Nivel nivel;
 
 }
