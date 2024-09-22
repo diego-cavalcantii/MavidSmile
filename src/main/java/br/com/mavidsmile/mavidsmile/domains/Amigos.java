@@ -7,22 +7,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Builder
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Amigo {
+public class Amigos {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String amizade;
 
     @ManyToOne
-    private Cliente ClienteIdEhAmigo;
+    @JoinColumn(name = "ClienteIdEhAmigo")
+    private Cliente clienteIdEhAmigo;
 
     @ManyToOne
-    private Cliente ClienteIdTemAmigo;
+    @JoinColumn(name = "ClienteIdTemAmigo")
+    private Cliente clienteIdTemAmigo;
 
 }

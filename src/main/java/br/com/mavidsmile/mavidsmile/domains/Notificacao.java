@@ -15,9 +15,10 @@ public class Notificacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id_notificacao;
+    private String idNotificacao;
 
     @ManyToOne
+    @JoinColumn(name = "idCliente")
     private Cliente cliente;
 
     private String tipo;

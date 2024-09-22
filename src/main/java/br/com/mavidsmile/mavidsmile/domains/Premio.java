@@ -15,15 +15,10 @@ import lombok.NoArgsConstructor;
 public class Premio {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id_premio;
+    private String idPremio;
 
-    private String nome_premio;
-    private String descricao_premio;
-    private String fotos_necessarias;
-
-    @ManyToOne
-    private Progresso progresso;
-
-
+    private String nomePremio;
+    private String descricaoPremio;
+    private String fotosNecessarias;
 
 }

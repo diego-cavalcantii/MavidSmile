@@ -18,8 +18,8 @@ public class Nivel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id_nivel;
-    private String nome_nivel;
+    private String idNivel;
+    private String nomeNivel;
 
 
 }

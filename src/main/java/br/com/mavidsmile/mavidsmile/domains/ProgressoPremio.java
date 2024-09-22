@@ -7,31 +7,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Builder
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente {
+public class ProgressoPremio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String idCliente;
+    private String idProgressoPremio;
 
-    @OneToOne
-    @JoinColumn(name = "idProgresso")
+    // Relacionamento ManyToOne com Progresso
+    @ManyToOne
+    @JoinColumn(name = "id_progresso")  // Chave estrangeira para Progresso
     private Progresso progresso;
 
+    // Relacionamento ManyToOne com Premio
     @ManyToOne
-    @JoinColumn(name = "idNivel")
-    private Nivel nivel;
-
-    @OneToMany(mappedBy = "clienteIdTemAmigo")
-    List<Amigos> amigos;
-
-    private String nomeCompleto;
-    private String email;
-    private String endereco;
+    @JoinColumn(name = "id_premio")  // Chave estrangeira para Premio
+    private Premio premio;
 }
