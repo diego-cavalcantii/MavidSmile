@@ -20,5 +20,10 @@ public class Nivel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String idNivel;
     private String nomeNivel;
+    private int fotosNecessarias;
+
+    @OneToOne
+    @JoinColumn(name = "idPremio")
+    private Premio premio;
 
 }

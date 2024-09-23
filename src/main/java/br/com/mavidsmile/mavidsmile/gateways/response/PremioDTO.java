@@ -8,5 +8,4 @@ import lombok.Data;
 public class PremioDTO {
     private String nomePremio;
     private String descricaoPremio;
-    private String fotosNecessarias;
 }

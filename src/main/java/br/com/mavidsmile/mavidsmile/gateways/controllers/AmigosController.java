@@ -1,14 +1,15 @@
-package br.com.mavidsmile.mavidsmile.gateways;
+package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
+import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
 import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmigoRequestDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
-import br.com.mavidsmile.mavidsmile.gateways.response.PremioDTO;
 import br.com.mavidsmile.mavidsmile.usecases.AdicionarAmigo;
+import br.com.mavidsmile.mavidsmile.usecases.BuscarClientes;
 import br.com.mavidsmile.mavidsmile.usecases.ExibiListaPremios;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,17 +21,23 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AmigosController {
 
-    private final ClienteRepository clienteRepository;
     private final ExibiListaPremios exibiListaPremios;
     private final AdicionarAmigo adicionarAmigo;
+    private final BuscarClientes buscarClientes;
 
     @GetMapping("/{clienteId}")
-    public ResponseEntity<List<ClienteGETResponseDTO>> exibiOsAmigosDeUmCliente(@PathVariable String clienteId) {
+    public ResponseEntity<?> exibiOsAmigosDeUmCliente(@PathVariable String clienteId) {
         // Busca o cliente pelo id
-        Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
+        Cliente cliente = buscarClientes.buscarPorId(clienteId);
+
         if (cliente == null) {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<String>("Cliente não encontrado", HttpStatus.NOT_FOUND);
         }
+
+        if(cliente.getAmigos() == null || cliente.getAmigos().isEmpty()) {
+            return new ResponseEntity<String>("Cliente não possui amigos", HttpStatus.OK);
+        }
+
         // Extrai a lista de amigos do cliente
         List<ClienteGETResponseDTO> amigosDTO = cliente.getAmigos().stream()
                 .map(amigo -> {
