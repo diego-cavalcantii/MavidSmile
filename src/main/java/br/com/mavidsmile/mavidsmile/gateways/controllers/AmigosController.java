@@ -6,6 +6,7 @@ import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmigoRequestDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.AdicionarAmigo;
 import br.com.mavidsmile.mavidsmile.usecases.BuscarClientes;
+import br.com.mavidsmile.mavidsmile.usecases.ExibiClienteDTO;
 import br.com.mavidsmile.mavidsmile.usecases.ExibiListaPremios;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ public class AmigosController {
     private final ExibiListaPremios exibiListaPremios;
     private final AdicionarAmigo adicionarAmigo;
     private final BuscarClientes buscarClientes;
+    private final ExibiClienteDTO exibiClienteDTO;
 
     @GetMapping("/{clienteId}")
     public ResponseEntity<?> exibiOsAmigosDeUmCliente(@PathVariable String clienteId) {
@@ -45,9 +47,9 @@ public class AmigosController {
                     return ClienteGETResponseDTO.builder()
                             .nomeCompleto(amigoCliente.getNomeCompleto())
                             .email(amigoCliente.getEmail())
-                            .nomeNivel(amigoCliente.getNivel().getNomeNivel())
+                            .nomeNivel(amigoCliente.getNivel() != null ? amigoCliente.getNivel().getNomeNivel() : "Nível não definido")
                             .email(amigoCliente.getEmail())
-                            .premiosRecebidos(exibiListaPremios.exibir(amigoCliente)) // Passa a lista de prêmios
+                            .premiosRecebidos(amigoCliente.getProgresso() != null ? exibiListaPremios.exibir(amigoCliente) : List.of()) // Passa a lista de prêmios
                             .build();
                 })
                 .collect(Collectors.toList());

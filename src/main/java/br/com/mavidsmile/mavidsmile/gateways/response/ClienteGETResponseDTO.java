@@ -2,6 +2,7 @@ package br.com.mavidsmile.mavidsmile.gateways.response;
 
 import br.com.mavidsmile.mavidsmile.domains.Nivel;
 import br.com.mavidsmile.mavidsmile.domains.Progresso;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,10 +10,12 @@ import java.util.List;
 
 @Data
 @Builder
+@JsonPropertyOrder({"nomeCompleto", "email","endereco","nomeNivel","registros", "premiosRecebidos", })
 public class ClienteGETResponseDTO {
     private String nomeNivel;
     private String nomeCompleto;
     private String email;
     private String endereco;
-    private List<PremioDTO> premiosRecebidos;
+    private int pontos;
+        private List<PremioDTO> premiosRecebidos;
 }

@@ -2,7 +2,9 @@ package br.com.mavidsmile.mavidsmile.usecases.impl;
 
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
+import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.BuscarClientes;
+import br.com.mavidsmile.mavidsmile.usecases.ExibiListaPremios;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,4 +27,10 @@ public class BuscarClientesImpl implements BuscarClientes {
         return clienteRepository.findById(clienteId)
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
     }
+
+    @Override
+    public List<Cliente> buscarClientesPorRankingDeRegistros() {
+        return clienteRepository.findAllByOrderByProgressoRegistrosDesc();
+    }
+
 }

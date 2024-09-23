@@ -27,5 +27,6 @@ public class Progresso {
     private List<ProgressoPremio> premiosRecebidos;
 
     private int registros;
+    private double pontos;
     private double porcentagemRegistros;
 }
