@@ -23,6 +23,7 @@ public class ExibiClienteDTOImpl implements ExibiClienteDTO {
         return ClienteGETResponseDTO.builder()
                 .nomeCompleto(cliente.getNomeCompleto())
                 .email(cliente.getEmail())
+                .endereco(cliente.getEndereco())
                 .nomeNivel(cliente.getNivel() != null ? cliente.getNivel().getNomeNivel() : "Nível não definido")
                 .pontos(cliente.getProgresso() != null ? cliente.getProgresso().getPontos() : 0)
                 .premiosRecebidos(cliente.getProgresso() != null ? exibiListaPremios.exibir(cliente) : List.of())

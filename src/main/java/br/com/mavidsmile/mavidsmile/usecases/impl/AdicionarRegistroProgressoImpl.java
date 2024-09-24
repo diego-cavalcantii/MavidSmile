@@ -21,12 +21,6 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
     public void adicionarRegistro(String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);// Encontra o cliente
 
-        if(cliente.getProgresso() == null) {
-            Progresso novoProgresso = Progresso.builder().registros(1).pontos(100).build();// Cria um novo progresso
-            progressoRepository.save(novoProgresso);// Salva o progresso no banco de dados
-            cliente.setProgresso(novoProgresso);// Associa o progresso ao cliente
-        }
-
         if(cliente.getProgresso() != null) {
             Progresso progressoCliente = cliente.getProgresso();// Pega o progresso do cliente
             progressoCliente.setRegistros(progressoCliente.getRegistros() + 1);// Incrementa o número de registros
@@ -34,6 +28,12 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
             progressoRepository.save(progressoCliente);// Salva o progresso no banco de dados
         }
 
-        clienteRepository.save(cliente);// Salva o cliente no banco de dados
+        if(cliente.getProgresso() == null) {
+            Progresso novoProgresso = Progresso.builder().registros(1).pontos(100).build();// Cria um novo progresso
+            progressoRepository.save(novoProgresso);// Salva o progresso no banco de dados
+            cliente.setProgresso(novoProgresso);// Associa o progresso ao cliente
+            clienteRepository.save(cliente);// Salva o cliente no banco de dados
+        }
+
     }
 }

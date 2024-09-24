@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Builder
-@JsonPropertyOrder({"nomeCompleto", "email","endereco","nomeNivel","registros", "premiosRecebidos", })
+@JsonPropertyOrder({"nomeCompleto", "email","endereco","nomeNivel","pontos", "premiosRecebidos", })
 public class ClienteGETResponseDTO {
     private String nomeNivel;
     private String nomeCompleto;
