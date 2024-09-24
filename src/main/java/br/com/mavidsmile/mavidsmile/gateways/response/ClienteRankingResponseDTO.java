@@ -8,5 +8,5 @@ import lombok.Data;
 public class ClienteRankingResponseDTO {
     private String nomeCompleto;
     private String nomeNivel;
-    private int registros;
+    private int pontos;
 }

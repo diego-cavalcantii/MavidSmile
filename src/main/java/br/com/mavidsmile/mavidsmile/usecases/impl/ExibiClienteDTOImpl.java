@@ -24,7 +24,7 @@ public class ExibiClienteDTOImpl implements ExibiClienteDTO {
                 .nomeCompleto(cliente.getNomeCompleto())
                 .email(cliente.getEmail())
                 .nomeNivel(cliente.getNivel() != null ? cliente.getNivel().getNomeNivel() : "Nível não definido")
-                .pon(cliente.getProgresso() != null ? cliente.getProgresso().getRegistros() : 0)
+                .pontos(cliente.getProgresso() != null ? cliente.getProgresso().getPontos() : 0)
                 .premiosRecebidos(cliente.getProgresso() != null ? exibiListaPremios.exibir(cliente) : List.of())
                 .build();
     }
@@ -44,7 +44,7 @@ public class ExibiClienteDTOImpl implements ExibiClienteDTO {
     public ClienteRankingResponseDTO transformarClienteRankingDTO(Cliente cliente) {
         return ClienteRankingResponseDTO.builder()
                 .nomeCompleto(cliente.getNomeCompleto())
-                .registros(cliente.getProgresso() != null ? cliente.getProgresso().getRegistros() : 0)
+                .pontos(cliente.getProgresso() != null ? cliente.getProgresso().getPontos() : 0)
                 .nomeNivel(cliente.getNivel() != null ? cliente.getNivel().getNomeNivel() : "Nível não definido")
                 .build();
     }

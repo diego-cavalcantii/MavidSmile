@@ -20,7 +20,7 @@ public class Nivel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String idNivel;
     private String nomeNivel;
-    private int fotosNecessarias;
+    private int pontosNecessarios;
 
     @OneToOne
     @JoinColumn(name = "idPremio")

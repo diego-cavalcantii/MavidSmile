@@ -25,7 +25,6 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
             Progresso novoProgresso = Progresso.builder().registros(1).pontos(100).build();// Cria um novo progresso
             progressoRepository.save(novoProgresso);// Salva o progresso no banco de dados
             cliente.setProgresso(novoProgresso);// Associa o progresso ao cliente
-            clienteRepository.save(cliente);// Salva o cliente no banco de dados
         }
 
         if(cliente.getProgresso() != null) {
@@ -34,5 +33,7 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
             progressoCliente.setPontos(progressoCliente.getPontos() + 100);// Incrementa os pontos
             progressoRepository.save(progressoCliente);// Salva o progresso no banco de dados
         }
+
+        clienteRepository.save(cliente);// Salva o cliente no banco de dados
     }
 }

@@ -1,7 +1,5 @@
 package br.com.mavidsmile.mavidsmile.gateways.response;
 
-import br.com.mavidsmile.mavidsmile.domains.Nivel;
-import br.com.mavidsmile.mavidsmile.domains.Progresso;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Builder;
 import lombok.Data;
@@ -17,5 +15,5 @@ public class ClienteGETResponseDTO {
     private String email;
     private String endereco;
     private int pontos;
-        private List<PremioDTO> premiosRecebidos;
+    private List<PremioDTO> premiosRecebidos;
 }

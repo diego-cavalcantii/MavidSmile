@@ -19,10 +19,6 @@ public class Premio {
 
     private String nomePremio;
     private String descricaoPremio;
-//    private int fotosNecessarias;
 
-//    @OneToOne
-//    @JoinColumn(name = "idNivel")
-//    private Nivel nivel;
 
 }

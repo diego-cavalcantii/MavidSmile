@@ -34,7 +34,7 @@ public class AtualizarNivelClienteImpl implements AtualizarNivelCliente {
 
         List<Nivel> niveis = nivelRepository.findAll();
         for (Nivel nivel : niveis) {
-            if(progresso.getRegistros() == nivel.getFotosNecessarias()) {
+            if(progresso.getPontos() == nivel.getPontosNecessarios()) {
                 cliente.setNivel(nivel);
                 clienteRepository.save(cliente);
 
