@@ -83,8 +83,6 @@ public class ClienteController {
 
         adicionarRegistroProgresso.adicionarRegistro(clienteId);
 
-        atualizarNivelCliente.atualizarNivel(clienteId);
-
         return ResponseEntity.ok("Registro adicionado com sucesso");
 
     }

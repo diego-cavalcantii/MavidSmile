@@ -5,6 +5,7 @@ import br.com.mavidsmile.mavidsmile.domains.Progresso;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ProgressoRepository;
 import br.com.mavidsmile.mavidsmile.usecases.AdicionarRegistroProgresso;
+import br.com.mavidsmile.mavidsmile.usecases.AtualizarNivelCliente;
 import br.com.mavidsmile.mavidsmile.usecases.BuscarClientes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
     private final ProgressoRepository progressoRepository;
     private final ClienteRepository clienteRepository;
     private final BuscarClientes buscarClientes;
+    private final AtualizarNivelCliente atualizarNivelCliente;
 
     @Override
     public void adicionarRegistro(String clienteId) {
@@ -34,6 +36,8 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
             cliente.setProgresso(novoProgresso);// Associa o progresso ao cliente
             clienteRepository.save(cliente);// Salva o cliente no banco de dados
         }
+
+        atualizarNivelCliente.atualizarNivel(clienteId);
 
     }
 }
