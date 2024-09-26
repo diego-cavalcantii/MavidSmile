@@ -1,6 +1,7 @@
 package br.com.mavidsmile.mavidsmile.domains;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 
@@ -26,7 +27,7 @@ public class Progresso {
     @OneToMany(mappedBy = "progresso")
     private List<ProgressoPremio> premiosRecebidos;
 
+
     private int registros;
     private int pontos;
-    private double porcentagemRegistros;
 }

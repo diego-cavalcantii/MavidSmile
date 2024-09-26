@@ -1,6 +1,7 @@
 package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
+import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmigosNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
 import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmigoRequestDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
@@ -8,6 +9,7 @@ import br.com.mavidsmile.mavidsmile.usecases.AdicionarAmigo;
 import br.com.mavidsmile.mavidsmile.usecases.BuscarClientes;
 import br.com.mavidsmile.mavidsmile.usecases.ExibiClienteDTO;
 import br.com.mavidsmile.mavidsmile.usecases.ExibiListaPremios;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,35 +24,24 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AmigosController {
 
-    private final ExibiListaPremios exibiListaPremios;
     private final AdicionarAmigo adicionarAmigo;
     private final BuscarClientes buscarClientes;
     private final ExibiClienteDTO exibiClienteDTO;
 
     @GetMapping("/{clienteId}")
-    public ResponseEntity<?> exibiOsAmigosDeUmCliente(@PathVariable String clienteId) {
+    public ResponseEntity<List<ClienteGETResponseDTO>> exibiOsAmigosDeUmCliente(@PathVariable String clienteId) {
         // Busca o cliente pelo id
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
-        if (cliente == null) {
-            return new ResponseEntity<String>("Cliente não encontrado", HttpStatus.NOT_FOUND);
-        }
-
-        if(cliente.getAmigos() == null || cliente.getAmigos().isEmpty()) {
-            return new ResponseEntity<String>("Cliente não possui amigos", HttpStatus.OK);
+        if(cliente.getAmigos().isEmpty()) {
+            throw new AmigosNotFoundException("Nenhum amigo encontrado");
         }
 
         // Extrai a lista de amigos do cliente
         List<ClienteGETResponseDTO> amigosDTO = cliente.getAmigos().stream()
                 .map(amigo -> {
-                    Cliente amigoCliente = amigo.getClienteIdEhAmigo();  // O cliente que é o amigo
-                    return ClienteGETResponseDTO.builder()
-                            .nomeCompleto(amigoCliente.getNomeCompleto())
-                            .email(amigoCliente.getEmail())
-                            .nomeNivel(amigoCliente.getNivel() != null ? amigoCliente.getNivel().getNomeNivel() : "Nível não definido")
-                            .email(amigoCliente.getEmail())
-                            .premiosRecebidos(amigoCliente.getProgresso() != null ? exibiListaPremios.exibir(amigoCliente) : List.of()) // Passa a lista de prêmios
-                            .build();
+                    Cliente amigoCliente = amigo.getClienteIdEhAmigo();
+                    return exibiClienteDTO.transformarClienteGetDTO(amigoCliente);
                 })
                 .collect(Collectors.toList());
 
@@ -58,7 +49,7 @@ public class AmigosController {
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<String> adicionarUmAmigo(@RequestBody AdicionarAmigoRequestDTO requestDTO) {
+    public ResponseEntity<String> adicionarUmAmigo(@RequestBody @Valid AdicionarAmigoRequestDTO requestDTO) {
         adicionarAmigo.adicionarAmigo(requestDTO);
         return ResponseEntity.ok("Amigo adicionado com sucesso");
     }

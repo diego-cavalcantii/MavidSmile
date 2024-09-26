@@ -10,7 +10,6 @@ import java.util.List;
 public class ClienteProgressoResponseDTO {
     private String nomeCompleto;
     private String registros;
-    private String porcentagemRegistros;
     private String pontos;
     private List<PremioDTO> premiosRecebidos;
 }

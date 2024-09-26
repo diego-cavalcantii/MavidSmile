@@ -37,7 +37,6 @@ public class ExibiClienteDTOImpl implements ExibiClienteDTO {
                 .registros(String.valueOf(cliente.getProgresso().getRegistros()))
                 .pontos(String.valueOf(cliente.getProgresso().getPontos()))
                 .premiosRecebidos(exibiListaPremios.exibir(cliente))
-                .porcentagemRegistros(String.valueOf(cliente.getProgresso().getPorcentagemRegistros()))
                 .build();
     }
 

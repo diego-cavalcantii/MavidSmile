@@ -2,6 +2,8 @@ package br.com.mavidsmile.mavidsmile.domains;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +33,15 @@ public class Cliente {
     @OneToMany(mappedBy = "clienteIdTemAmigo")
     List<Amigos> amigos;
 
+    @NotBlank
+    @Size(min = 3, max = 100)
     private String nomeCompleto;
+
+    @NotBlank
+    @Size(min = 3, max = 100)
     private String email;
+
+    @NotBlank
+    @Size(min = 3, max = 100)
     private String endereco;
 }

@@ -28,9 +28,6 @@ public class AtualizarNivelClienteImpl implements AtualizarNivelCliente {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
         Progresso progresso = cliente.getProgresso();
-        if (progresso == null) {
-            return;
-        }
 
         List<Nivel> niveis = nivelRepository.findAll();
         for (Nivel nivel : niveis) {

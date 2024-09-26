@@ -1,11 +1,15 @@
 package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
 import br.com.mavidsmile.mavidsmile.domains.*;
+import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmigosNotFoundException;
+import br.com.mavidsmile.mavidsmile.gateways.exceptions.ClienteNotFoundException;
+import br.com.mavidsmile.mavidsmile.gateways.exceptions.ProgressoNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteProgressoResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.*;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +25,9 @@ import java.util.stream.Collectors;
 public class ClienteController {
 
     private final AdicionarRegistroProgresso adicionarRegistroProgresso;
-    private final AtualizarNivelCliente atualizarNivelCliente;
     private final ExibiClienteDTO exibiClienteDTO;
     private final BuscarClientes buscarClientes;
+    private final ClienteRepository clienteRepository;
 
 
     @GetMapping
@@ -41,9 +45,6 @@ public class ClienteController {
     public ResponseEntity<ClienteGETResponseDTO> exibiUmCliente(@PathVariable String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
-        if(cliente == null){
-            return ResponseEntity.notFound().build();
-        }
         ClienteGETResponseDTO clienteDTO = exibiClienteDTO.transformarClienteGetDTO(cliente);
 
         return ResponseEntity.ok(clienteDTO);
@@ -51,10 +52,11 @@ public class ClienteController {
 
     @GetMapping("/ranking")
     public ResponseEntity<List<ClienteRankingResponseDTO>> exibiRankingClientes() {
-        List<Cliente> clientes = buscarClientes.buscarClientesPorRankingDeRegistros();
+
+        List<Cliente> amigosCliente = buscarClientes.buscarClientesPorRankingDeRegistros();
 
 
-        List<ClienteRankingResponseDTO> clientesDTO = clientes.stream()
+        List<ClienteRankingResponseDTO> clientesDTO = amigosCliente.stream()
                 .map(exibiClienteDTO::transformarClienteRankingDTO)
                 .collect(Collectors.toList());
 
@@ -66,11 +68,9 @@ public class ClienteController {
     @GetMapping("/progresso/{clienteId}")
     public ResponseEntity<ClienteProgressoResponseDTO> exibiProgressoDeUmCliente (@PathVariable String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
-        if (cliente == null) {
-            return ResponseEntity.notFound().build();
-        }
+
         if(cliente.getProgresso() == null){
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            throw new ProgressoNotFoundException("Progresso do cliente com ID " + clienteId + " não encontrado");
         }
 
         ClienteProgressoResponseDTO clienteProgressoDTO = exibiClienteDTO.transformarClienteProgressoDTO(cliente);
@@ -79,12 +79,21 @@ public class ClienteController {
 
 
     @PostMapping("/adicionar-registro/{clienteId}")
-    public ResponseEntity<String> adicionarRegistroDeUmCliente(@PathVariable String clienteId) {
+    public ResponseEntity<String> adicionarRegistroDeUmCliente(@PathVariable @Valid String clienteId) {
 
         adicionarRegistroProgresso.adicionarRegistro(clienteId);
 
         return ResponseEntity.ok("Registro adicionado com sucesso");
 
+    }
+
+    @DeleteMapping("/{clienteId}")
+    public ResponseEntity<String> deletarUmCliente(@PathVariable String clienteId) {
+        Cliente cliente = buscarClientes.buscarPorId(clienteId);
+
+        clienteRepository.delete(cliente);
+
+        return ResponseEntity.ok("Cliente deletado com sucesso");
     }
 
 }
