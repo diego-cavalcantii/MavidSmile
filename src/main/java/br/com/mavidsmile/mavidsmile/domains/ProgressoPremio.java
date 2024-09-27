@@ -2,6 +2,7 @@ package br.com.mavidsmile.mavidsmile.domains;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,10 +22,12 @@ public class ProgressoPremio {
     // Relacionamento ManyToOne com Progresso
     @ManyToOne
     @JoinColumn(name = "id_progresso")  // Chave estrangeira para Progresso
+    @NotNull
     private Progresso progresso;
 
     // Relacionamento ManyToOne com Premio
     @ManyToOne
     @JoinColumn(name = "id_premio")  // Chave estrangeira para Premio
+    @NotNull
     private Premio premio;
 }

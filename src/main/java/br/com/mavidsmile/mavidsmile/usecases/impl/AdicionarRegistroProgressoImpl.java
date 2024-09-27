@@ -4,9 +4,9 @@ import br.com.mavidsmile.mavidsmile.domains.Cliente;
 import br.com.mavidsmile.mavidsmile.domains.Progresso;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ProgressoRepository;
-import br.com.mavidsmile.mavidsmile.usecases.AdicionarRegistroProgresso;
-import br.com.mavidsmile.mavidsmile.usecases.AtualizarNivelCliente;
-import br.com.mavidsmile.mavidsmile.usecases.BuscarClientes;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.AdicionarRegistroProgresso;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.AtualizarNivelCliente;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

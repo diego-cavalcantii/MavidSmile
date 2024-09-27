@@ -1,4 +1,4 @@
-package br.com.mavidsmile.mavidsmile.usecases;
+package br.com.mavidsmile.mavidsmile.usecases.interfaces;
 
 import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmigoRequestDTO;
 import org.springframework.stereotype.Service;

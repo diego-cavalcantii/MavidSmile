@@ -4,8 +4,8 @@ import br.com.mavidsmile.mavidsmile.domains.Cliente;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteProgressoResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
-import br.com.mavidsmile.mavidsmile.usecases.ExibiClienteDTO;
-import br.com.mavidsmile.mavidsmile.usecases.ExibiListaPremios;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiClienteDTO;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiListaPremios;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -3,7 +3,7 @@ package br.com.mavidsmile.mavidsmile.usecases.impl;
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.ClienteNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
-import br.com.mavidsmile.mavidsmile.usecases.BuscarClientes;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class BuscarClientesImpl implements BuscarClientes {
     }
 
     @Override
-    public List<Cliente> buscarClientesPorRankingDeRegistros() {
+    public List<Cliente> buscarClientesPorRankingDePontos() {
         return clienteRepository.findAllByOrderByProgressoPontosDesc();
     }
 

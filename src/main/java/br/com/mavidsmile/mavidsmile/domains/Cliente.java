@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String idCliente;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idProgresso")
     private Progresso progresso;
 
@@ -30,7 +31,7 @@ public class Cliente {
     @JoinColumn(name = "idNivel")
     private Nivel nivel;
 
-    @OneToMany(mappedBy = "clienteIdTemAmigo")
+    @OneToMany(mappedBy = "clienteIdTemAmigo",cascade = CascadeType.ALL)
     List<Amigos> amigos;
 
     @NotBlank

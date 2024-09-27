@@ -1,17 +1,16 @@
 package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
 import br.com.mavidsmile.mavidsmile.domains.*;
-import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmigosNotFoundException;
-import br.com.mavidsmile.mavidsmile.gateways.exceptions.ClienteNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.ProgressoNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteProgressoResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
-import br.com.mavidsmile.mavidsmile.usecases.*;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.AdicionarRegistroProgresso;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiClienteDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,9 +50,9 @@ public class ClienteController {
     }
 
     @GetMapping("/ranking")
-    public ResponseEntity<List<ClienteRankingResponseDTO>> exibiRankingClientes() {
+    public ResponseEntity<List<ClienteRankingResponseDTO>> exibiRankingGeralDosClientes() {
 
-        List<Cliente> amigosCliente = buscarClientes.buscarClientesPorRankingDeRegistros();
+        List<Cliente> amigosCliente = buscarClientes.buscarClientesPorRankingDePontos();
 
 
         List<ClienteRankingResponseDTO> clientesDTO = amigosCliente.stream()
@@ -62,7 +61,6 @@ public class ClienteController {
 
         return ResponseEntity.ok(clientesDTO);
     }
-
 
     @ResponseStatus
     @GetMapping("/progresso/{clienteId}")

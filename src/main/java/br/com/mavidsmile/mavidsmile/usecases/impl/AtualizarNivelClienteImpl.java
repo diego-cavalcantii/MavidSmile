@@ -7,8 +7,8 @@ import br.com.mavidsmile.mavidsmile.domains.ProgressoPremio;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.NivelRepository;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ProgressoPremioRepository;
-import br.com.mavidsmile.mavidsmile.usecases.AtualizarNivelCliente;
-import br.com.mavidsmile.mavidsmile.usecases.BuscarClientes;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.AtualizarNivelCliente;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

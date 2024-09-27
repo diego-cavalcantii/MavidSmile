@@ -2,10 +2,11 @@ package br.com.mavidsmile.mavidsmile.usecases.impl;
 
 import br.com.mavidsmile.mavidsmile.domains.Amigos;
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
+import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmigosNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.AmigosRepository;
 import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmigoRequestDTO;
-import br.com.mavidsmile.mavidsmile.usecases.AdicionarAmigo;
-import br.com.mavidsmile.mavidsmile.usecases.BuscarClientes;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.AdicionarAmigo;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,10 @@ public class AdicionarAmigoImpl implements AdicionarAmigo {
         Cliente clienteTemAmigo = buscarClientes.buscarPorId(requestDTO.getClienteIdTemAmigo());
 
         Cliente clienteEhAmigo = buscarClientes.buscarPorId(requestDTO.getClienteIdEhAmigo());
+
+        if(clienteTemAmigo.equals(clienteEhAmigo)) {
+            throw new AmigosNotFoundException("Não é possível adicionar você mesmo como amigo");
+        }
 
         Amigos novoAmigo = Amigos.builder()
                 .clienteIdTemAmigo(clienteTemAmigo)

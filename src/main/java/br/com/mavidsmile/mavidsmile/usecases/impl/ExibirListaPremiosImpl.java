@@ -3,8 +3,7 @@ package br.com.mavidsmile.mavidsmile.usecases.impl;
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 
 import br.com.mavidsmile.mavidsmile.gateways.response.PremioDTO;
-import br.com.mavidsmile.mavidsmile.usecases.ExibiListaPremios;
-import lombok.RequiredArgsConstructor;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiListaPremios;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
