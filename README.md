@@ -22,11 +22,11 @@ Exemplo de coisas a considerar para adicionar:
 
 Aqui você deve inserir os dois diagramas.
 
-1. Diagrama da Arquitetura:
-   ![Diagrama da Arquitetura](CAMINHO/DO/DIAGRAMA1.png)
+1. Diagrama de Classes:
+   ![Diagrama da Arquitetura](diagramas/diagrama%20de%20classe.jpeg)
 
-2. Diagrama do Banco de Dados:
-   ![Diagrama do Banco de Dados](CAMINHO/DO/DIAGRAMA2.png)
+2. Diagrama Entidade Relacionamento:
+   ![Diagrama do Banco de Dados](diagramas/diagrama%20entidade%20relacionamento.png)
 
 ---
 
