@@ -19,7 +19,7 @@ public class AdicionarAmigoImpl implements AdicionarAmigo {
     private final BuscarClientes buscarClientes;
 
     @Override
-    public void adicionarAmigo(AdicionarAmigoRequestDTO requestDTO) {
+    public void executa(AdicionarAmigoRequestDTO requestDTO) {
         Cliente clienteTemAmigo = buscarClientes.buscarPorId(requestDTO.getClienteIdTemAmigo());
 
         Cliente clienteEhAmigo = buscarClientes.buscarPorId(requestDTO.getClienteIdEhAmigo());

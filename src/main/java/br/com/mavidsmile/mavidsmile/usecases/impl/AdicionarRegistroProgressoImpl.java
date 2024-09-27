@@ -20,7 +20,7 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
     private final AtualizarNivelCliente atualizarNivelCliente;
 
     @Override
-    public void adicionarRegistro(String clienteId) {
+    public void executa(String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);// Encontra o cliente
 
         if(cliente.getProgresso() != null) {
@@ -37,7 +37,7 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
             clienteRepository.save(cliente);// Salva o cliente no banco de dados
         }
 
-        atualizarNivelCliente.atualizarNivel(clienteId);
+        atualizarNivelCliente.executa(clienteId);
 
     }
 }

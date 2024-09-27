@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface AdicionarAmigo {
-    void adicionarAmigo(AdicionarAmigoRequestDTO requestDTO);
+    void executa(AdicionarAmigoRequestDTO requestDTO);
 }

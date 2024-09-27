@@ -50,7 +50,7 @@ public class AmigosController {
     @PostMapping("/adicionar")
     public ResponseEntity<String> adicionarUmAmigo(@RequestBody @Valid AdicionarAmigoRequestDTO requestDTO) {
 
-        adicionarAmigo.adicionarAmigo(requestDTO);
+        adicionarAmigo.executa(requestDTO);
 
         return ResponseEntity.ok("Amigo adicionado com sucesso");
     }
@@ -72,7 +72,7 @@ public class AmigosController {
 
         listaDeAmigos.add(exibiClienteDTO.transformarClienteRankingDTO(cliente));
 
-        List<ClienteRankingResponseDTO> listaDeaAmigosOrdenadosPorPontos = ordenarListaPorPontos.execute(listaDeAmigos);
+        List<ClienteRankingResponseDTO> listaDeaAmigosOrdenadosPorPontos = ordenarListaPorPontos.executa(listaDeAmigos);
 
 
         return  ResponseEntity.ok(listaDeaAmigosOrdenadosPorPontos);
@@ -82,11 +82,9 @@ public class AmigosController {
     @DeleteMapping("/remover/{clienteId}/{amigoId}")
     public ResponseEntity<String> removerAmizade(@PathVariable String clienteId, @PathVariable String amigoId) {
 
-        removerAmizade.execute(clienteId, amigoId);
+        removerAmizade.executa(clienteId, amigoId);
 
         return ResponseEntity.ok("Amizade removida com sucesso");
     }
-
-
 
 }

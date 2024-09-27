@@ -24,7 +24,7 @@ public class AtualizarNivelClienteImpl implements AtualizarNivelCliente {
     private final BuscarClientes buscarClientes;
 
     @Override
-    public void atualizarNivel(String clienteId) {
+    public void executa(String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
         Progresso progresso = cliente.getProgresso();

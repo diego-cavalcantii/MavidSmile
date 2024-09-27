@@ -9,5 +9,5 @@ import java.util.List;
 @Service
 public interface ExibiListaPremios {
 
-    List<PremioDTO> exibir(Cliente cliente);
+    List<PremioDTO> executa(Cliente cliente);
 }
