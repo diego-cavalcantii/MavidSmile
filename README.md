@@ -85,10 +85,14 @@ Aqui você deve adicionar o link para o vídeo explicando a aplicação.
 - `GET /progresso/{clienteId}` - Retorna um o progresso de um cliente especifico por ID.
 
 - ### Amizades
-- `POST /amigos/adicionar` - Adiciona uma amizade entre um cliente que é amigo e que tem amigo.
-- `GET /amigos/{clienteId}` - Retorna os amigos de um cliente.
-- `GET /amigos/ranking/{clienteId}` - Retorna o ranking de progresso dos amigos de um cliente.
-- `DELETE /remover/{clienteId}/{amigoId}` - Remove uma amizade.
+- `POST /amizade/adicionar` - Adiciona uma amizade entre um cliente que é amigo e que tem amigo.
+{
+    "clienteIdTemAmigo" : clienteId,
+    "clienteIdEhAmigo" : clienteId
+ }
+- `GET /amizade/{clienteId}` - Retorna os amigos de um cliente.
+- `GET /amizade/ranking/{clienteId}` - Retorna o ranking de progresso dos amigos de um cliente.
+- `DELETE amizade/remover/{clienteId}/{amigoId}` - Remove uma amizade.
 
 
 
