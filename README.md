@@ -15,25 +15,38 @@
 -- Prêmios
 
 INSERT INTO `premio`(`descricao_premio`, `id_premio`, `nome_premio`) VALUES ('Kit de escova de dente', '1', 'Kit Escova');
+
 INSERT INTO `premio`(`descricao_premio`, `id_premio`, `nome_premio`) VALUES ('Creme dental 100g', '2', 'Creme Dental');
+
 INSERT INTO `premio`(`descricao_premio`, `id_premio`, `nome_premio`) VALUES ('Fio dental 50m', '3', 'Fio Dental');
+
 INSERT INTO `premio`(`descricao_premio`, `id_premio`, `nome_premio`) VALUES ('Enxaguante bucal 500ml', '4', 'Enxaguante Bucal');
+
 INSERT INTO `premio`(`descricao_premio`, `id_premio`, `nome_premio`) VALUES ('Kit clareador dental', '5', 'Kit Clareador');
+
 
 -- Niveis
 
 INSERT INTO `nivel`(`pontos_necessarios`, `id_nivel`, `id_premio`, `nome_nivel`) VALUES ('100', '101', '1', 'Bafo de Bosta');  -- Pior nível
+
 INSERT INTO `nivel`(`pontos_necessarios`, `id_nivel`, `id_premio`, `nome_nivel`) VALUES ('2000', '102', '2', 'Gengiva Sangrenta');
+
 INSERT INTO `nivel`(`pontos_necessarios`, `id_nivel`, `id_premio`, `nome_nivel`) VALUES ('3000', '103', '3', 'Cárie Assassina');
+
 INSERT INTO `nivel`(`pontos_necessarios`, `id_nivel`, `id_premio`, `nome_nivel`) VALUES ('4500', '104', '4', 'Raiz Nervosa');
+
 INSERT INTO `nivel`(`pontos_necessarios`, `id_nivel`, `id_premio`, `nome_nivel`) VALUES ('7000', '105', '5', 'Dentes Branquinhos');  -- Melhor nível
 
 -- Clientes
 
 INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`) VALUES ('joao.silva@gmail.com', 'Rua das Flores, 123', 'João Silva', '201');
+
 INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`) VALUES ('maria.oliveira@gmail.com', 'Avenida Brasil, 456', 'Maria Oliveira', '202');
+
 INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`) VALUES ('carlos.santos@gmail.com', 'Rua dos Pinheiros, 789', 'Carlos Santos', '203');
+
 INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`) VALUES ('ana.costa@gmail.com', 'Travessa do Sol, 101', 'Ana Costa', '204');
+
 INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`) VALUES ('pedro.almeida@gmail.com', 'Alameda das Palmeiras, 202', 'Pedro Almeida', '205');
 
 
