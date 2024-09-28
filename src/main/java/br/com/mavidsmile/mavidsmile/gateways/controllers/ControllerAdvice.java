@@ -1,6 +1,6 @@
 package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
-import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmigosNotFoundException;
+import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmizadeNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.ClienteNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.ProgressoNotFoundException;
 import org.hibernate.PropertyValueException;
@@ -27,8 +27,8 @@ public class ControllerAdvice {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(AmigosNotFoundException.class)
-    public ResponseEntity<String> trataAmigosControllerException(AmigosNotFoundException ex, WebRequest request) {
+    @ExceptionHandler(AmizadeNotFoundException.class)
+    public ResponseEntity<String> trataAmigosControllerException(AmizadeNotFoundException ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 

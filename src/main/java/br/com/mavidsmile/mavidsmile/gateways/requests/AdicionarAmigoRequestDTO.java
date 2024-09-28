@@ -1,9 +1,12 @@
 package br.com.mavidsmile.mavidsmile.gateways.requests;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Data
-public class AdicionarAmigoRequestDTO {
-    private String clienteIdTemAmigo;
-    private String clienteIdEhAmigo;
+@Valid
+public record AdicionarAmigoRequestDTO(
+        @NotNull  String clienteIdTemAmigo,
+        @NotNull  String clienteIdEhAmigo) {
+
 }

@@ -1,10 +1,7 @@
 package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
-import br.com.mavidsmile.mavidsmile.domains.Amigos;
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
-import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmigosNotFoundException;
-import br.com.mavidsmile.mavidsmile.gateways.repositories.AmigosRepository;
-import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
+import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmizadeNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmigoRequestDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
@@ -19,11 +16,11 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/amigos")
+@RequestMapping("/amizade")
 @RequiredArgsConstructor
-public class AmigosController {
+public class AmizadeController {
 
-    private final AdicionarAmigo adicionarAmigo;
+    private final AdicionarAmizade adicionarAmizade;
     private final BuscarClientes buscarClientes;
     private final ExibiClienteDTO exibiClienteDTO;
     private final OrdenarListaPorPontos ordenarListaPorPontos;
@@ -34,7 +31,7 @@ public class AmigosController {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
         if(cliente.getAmigos().isEmpty()) {
-            throw new AmigosNotFoundException("Nenhum amigo encontrado");
+            throw new AmizadeNotFoundException("Nenhum amigo encontrado");
         }
 
         List<ClienteGETResponseDTO> amigosDTO = cliente.getAmigos().stream()
@@ -50,7 +47,7 @@ public class AmigosController {
     @PostMapping("/adicionar")
     public ResponseEntity<String> adicionarUmAmigo(@RequestBody @Valid AdicionarAmigoRequestDTO requestDTO) {
 
-        adicionarAmigo.adicionarAmigo(requestDTO);
+        adicionarAmizade.adicionarAmigo(requestDTO);
 
         return ResponseEntity.ok("Amigo adicionado com sucesso");
     }
@@ -60,7 +57,7 @@ public class AmigosController {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
         if(cliente.getAmigos().isEmpty()) {
-            throw new AmigosNotFoundException("Nenhum amigo encontrado");
+            throw new AmizadeNotFoundException("Nenhum amigo encontrado");
         }
 
         List<ClienteRankingResponseDTO> listaDeAmigos = cliente.getAmigos().stream()

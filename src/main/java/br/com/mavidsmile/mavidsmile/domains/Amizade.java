@@ -2,7 +2,6 @@ package br.com.mavidsmile.mavidsmile.domains;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Amigos {
+public class Amizade {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String amizade;

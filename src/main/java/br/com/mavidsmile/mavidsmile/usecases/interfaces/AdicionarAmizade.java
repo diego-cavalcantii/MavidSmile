@@ -4,6 +4,6 @@ import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmigoRequestDTO;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface AdicionarAmigo {
+public interface AdicionarAmizade {
     void adicionarAmigo(AdicionarAmigoRequestDTO requestDTO);
 }

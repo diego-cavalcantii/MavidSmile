@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class Cliente {
     private Nivel nivel;
 
     @OneToMany(mappedBy = "clienteIdTemAmigo",cascade = CascadeType.ALL)
-    List<Amigos> amigos;
+    List<Amizade> amigos;
 
     @NotBlank
     @Size(min = 3, max = 100)
