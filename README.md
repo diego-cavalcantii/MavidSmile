@@ -76,18 +76,18 @@ Aqui você deve adicionar o link para o vídeo explicando a aplicação.
 
 ### Clientes
 - `GET /clientes` - Retorna todos os clientes.
-- `GET /clientes/{id}` - Retorna um cliente específico por ID.
-- `DELETE /clientes/{id}` - Remove um cliente.
+- `GET /clientes/{clienteId}` - Retorna um cliente específico por ID.
+- `DELETE /clientes/{clienteId}` - Remove um cliente.
 
 ### Progresso
-- `POST /clientes/adicionar-registro/{id}` - Cria um progresso para o cliente adicionando um registro, caso ja exista um progresso, adiciona mais um registro.
+- `POST /progresso/adicionar-registro/{clienteId}` - Cria um progresso para o cliente adicionando um registro, caso ja exista um progresso, adiciona mais um registro.
 - `GET /progresso` - Exibe o ranking do progresso de todos os clientes.
-- `GET /progresso/{id}` - Retorna um o progresso de um cliente especifico por ID.
+- `GET /progresso/{clienteId}` - Retorna um o progresso de um cliente especifico por ID.
 
 - ### Amizades
 - `POST /amigos/adicionar` - Adiciona uma amizade entre um cliente que é amigo e que tem amigo.
-- `GET /amigos/{id}` - Retorna os amigos de um cliente.
-- `GET /amigos/ranking/{id}` - Retorna o ranking de progresso dos amigos de um cliente.
+- `GET /amigos/{clienteId}` - Retorna os amigos de um cliente.
+- `GET /amigos/ranking/{clienteId}` - Retorna o ranking de progresso dos amigos de um cliente.
 - `DELETE /remover/{clienteId}/{amigoId}` - Remove uma amizade.
 
 
