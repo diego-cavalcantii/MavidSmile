@@ -9,6 +9,7 @@ import br.com.mavidsmile.mavidsmile.gateways.repositories.NivelRepository;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ProgressoPremioRepository;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.AtualizarNivelCliente;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.EnviarNotificacao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class AtualizarNivelClienteImpl implements AtualizarNivelCliente {
     private final NivelRepository nivelRepository;
     private final ProgressoPremioRepository progressoPremioRepository;
     private final BuscarClientes buscarClientes;
+    private final EnviarNotificacao enviarNotificacao;
 
     @Override
     public void executa(String clienteId) {
@@ -41,6 +43,7 @@ public class AtualizarNivelClienteImpl implements AtualizarNivelCliente {
                         .premio(nivel.getPremio())
                         .build();
                 progressoPremioRepository.save(progressoPremio);
+                enviarNotificacao.nivelAtualizado(clienteId);
             }
         }
 

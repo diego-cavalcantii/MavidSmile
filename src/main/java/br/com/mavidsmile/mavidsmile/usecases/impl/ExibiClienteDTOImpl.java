@@ -1,7 +1,7 @@
 package br.com.mavidsmile.mavidsmile.usecases.impl;
 
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
-import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
+import br.com.mavidsmile.mavidsmile.gateways.response.ClienteResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteProgressoResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiClienteDTO;
@@ -19,8 +19,8 @@ public class ExibiClienteDTOImpl implements ExibiClienteDTO {
 
 
     @Override
-    public ClienteGETResponseDTO transformarClienteGetDTO(Cliente cliente) {
-        return ClienteGETResponseDTO.builder()
+    public ClienteResponseDTO transformarClienteGetDTO(Cliente cliente) {
+        return ClienteResponseDTO.builder()
                 .nomeCompleto(cliente.getNomeCompleto())
                 .email(cliente.getEmail())
                 .endereco(cliente.getEndereco())

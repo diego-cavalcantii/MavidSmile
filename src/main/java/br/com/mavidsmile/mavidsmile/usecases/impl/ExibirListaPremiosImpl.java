@@ -2,7 +2,7 @@ package br.com.mavidsmile.mavidsmile.usecases.impl;
 
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 
-import br.com.mavidsmile.mavidsmile.gateways.response.PremioDTO;
+import br.com.mavidsmile.mavidsmile.gateways.response.PremioResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiListaPremios;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 public class ExibirListaPremiosImpl implements ExibiListaPremios {
 
     @Override
-    public List<PremioDTO> executa(Cliente cliente) {
+    public List<PremioResponseDTO> executa(Cliente cliente) {
         return cliente.getProgresso().getPremiosRecebidos().stream()
-                .map(premio -> PremioDTO.builder()
+                .map(premio -> PremioResponseDTO.builder()
                         .nomePremio(premio.getPremio().getNomePremio())
                         .descricaoPremio(premio.getPremio().getDescricaoPremio())
 //                        .fotosNecessarias(String.valueOf(premio.getPremio().getFotosNecessarias()))

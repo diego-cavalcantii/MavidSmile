@@ -1,15 +1,10 @@
 package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
 import br.com.mavidsmile.mavidsmile.domains.*;
-import br.com.mavidsmile.mavidsmile.gateways.exceptions.ProgressoNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
-import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
-import br.com.mavidsmile.mavidsmile.gateways.response.ClienteProgressoResponseDTO;
-import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
-import br.com.mavidsmile.mavidsmile.usecases.interfaces.AdicionarRegistroProgresso;
+import br.com.mavidsmile.mavidsmile.gateways.response.ClienteResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiClienteDTO;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,21 +25,21 @@ public class ClienteController {
 
 
     @GetMapping
-    public ResponseEntity<List<ClienteGETResponseDTO>> exibiTodosOsClientes() {
+    public ResponseEntity<List<ClienteResponseDTO>> exibiTodosOsClientes() {
         List<Cliente> clientes = buscarClientes.buscarTodos();
 
-        List<ClienteGETResponseDTO> clientesDTO = clientes.stream()
+        List<ClienteResponseDTO> clientesDTO = clientes.stream()
                 .map(exibiClienteDTO::transformarClienteGetDTO)
-                .collect(Collectors.toList());
+                .toList();
 
         return ResponseEntity.ok(clientesDTO);
     }
 
     @GetMapping("/{clienteId}")
-    public ResponseEntity<ClienteGETResponseDTO> exibiUmCliente(@PathVariable String clienteId) {
+    public ResponseEntity<ClienteResponseDTO> exibiUmCliente(@PathVariable String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
-        ClienteGETResponseDTO clienteDTO = exibiClienteDTO.transformarClienteGetDTO(cliente);
+        ClienteResponseDTO clienteDTO = exibiClienteDTO.transformarClienteGetDTO(cliente);
 
         return ResponseEntity.ok(clienteDTO);
     }

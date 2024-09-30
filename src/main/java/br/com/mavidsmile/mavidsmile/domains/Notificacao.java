@@ -1,5 +1,6 @@
 package br.com.mavidsmile.mavidsmile.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,7 @@ public class Notificacao {
 
     @ManyToOne
     @JoinColumn(name = "idCliente")
+    @JsonIgnore
     private Cliente cliente;
 
     private String tipo;

@@ -4,7 +4,7 @@ package br.com.mavidsmile.mavidsmile.gateways.controllers;
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmizadeNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmigoRequestDTO;
-import br.com.mavidsmile.mavidsmile.gateways.response.ClienteGETResponseDTO;
+import br.com.mavidsmile.mavidsmile.gateways.response.ClienteResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.*;
 import jakarta.validation.Valid;
@@ -28,19 +28,19 @@ public class AmizadeController {
     private final RemoverAmizade removerAmizade;
 
     @GetMapping("/{clienteId}")
-    public ResponseEntity<List<ClienteGETResponseDTO>> exibiOsAmigosDeUmCliente(@PathVariable String clienteId) {
+    public ResponseEntity<List<ClienteResponseDTO>> exibiOsAmigosDeUmCliente(@PathVariable String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
         if(cliente.getAmigos().isEmpty()) {
             throw new AmizadeNotFoundException("Nenhum amigo encontrado");
         }
 
-        List<ClienteGETResponseDTO> amigosDTO = cliente.getAmigos().stream()
+        List<ClienteResponseDTO> amigosDTO = cliente.getAmigos().stream()
                 .map(amigo -> {
                     Cliente amigoCliente = amigo.getClienteIdEhAmigo();
                     return exibiClienteDTO.transformarClienteGetDTO(amigoCliente);
                 })
-                .collect(Collectors.toList());
+                .toList();
 
         return ResponseEntity.ok(amigosDTO);
     }

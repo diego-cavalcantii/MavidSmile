@@ -7,6 +7,7 @@ import br.com.mavidsmile.mavidsmile.gateways.repositories.ProgressoRepository;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.AdicionarRegistroProgresso;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.AtualizarNivelCliente;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.EnviarNotificacao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
     private final ClienteRepository clienteRepository;
     private final BuscarClientes buscarClientes;
     private final AtualizarNivelCliente atualizarNivelCliente;
+    private final EnviarNotificacao enviarNotificacao;
 
     @Override
     public void executa(String clienteId) {
@@ -38,6 +40,8 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
         }
 
         atualizarNivelCliente.executa(clienteId);
+
+
 
     }
 }
