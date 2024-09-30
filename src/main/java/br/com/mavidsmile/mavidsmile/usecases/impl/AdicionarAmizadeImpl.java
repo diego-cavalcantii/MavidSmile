@@ -21,7 +21,7 @@ public class AdicionarAmizadeImpl implements AdicionarAmizade {
     private final BuscarClientes buscarClientes;
 
     @Override
-    public void adicionarAmigo(AdicionarAmigoRequestDTO requestDTO) {
+    public void executa(AdicionarAmigoRequestDTO requestDTO) {
         Cliente clienteTemAmigo = buscarClientes.buscarPorId(requestDTO.clienteIdTemAmigo());
 
         Cliente clienteEhAmigo = buscarClientes.buscarPorId(requestDTO.clienteIdEhAmigo());
@@ -33,8 +33,8 @@ public class AdicionarAmizadeImpl implements AdicionarAmizade {
         List<Amizade> amigos = clienteTemAmigo.getAmigos();
 
         for (Amizade amigo : amigos) {
-            if (amigo.getClienteIdEhAmigo().equals(clienteEhAmigo)) {
-                throw new AmizadeNotFoundException("Amizade já existe");
+            if(amigo.getClienteIdEhAmigo().equals(clienteEhAmigo)) {
+                throw new AmizadeNotFoundException("Amizade ja existe");
             }
         }
 

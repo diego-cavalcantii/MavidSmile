@@ -26,7 +26,7 @@ public class ExibiClienteDTOImpl implements ExibiClienteDTO {
                 .endereco(cliente.getEndereco())
                 .nomeNivel(cliente.getNivel() != null ? cliente.getNivel().getNomeNivel() : "Nível não definido")
                 .pontos(cliente.getProgresso() != null ? cliente.getProgresso().getPontos() : 0)
-                .premiosRecebidos(cliente.getProgresso() != null ? exibiListaPremios.exibir(cliente) : List.of())
+                .premiosRecebidos(cliente.getProgresso() != null ? exibiListaPremios.executa(cliente) : List.of())
                 .build();
     }
 
@@ -36,7 +36,7 @@ public class ExibiClienteDTOImpl implements ExibiClienteDTO {
                 .nomeCompleto(cliente.getNomeCompleto())
                 .registros(String.valueOf(cliente.getProgresso().getRegistros()))
                 .pontos(String.valueOf(cliente.getProgresso().getPontos()))
-                .premiosRecebidos(exibiListaPremios.exibir(cliente))
+                .premiosRecebidos(exibiListaPremios.executa(cliente))
                 .build();
     }
 

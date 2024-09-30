@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class ExibirListaPremiosImpl implements ExibiListaPremios {
 
     @Override
-    public List<PremioDTO> exibir(Cliente cliente) {
+    public List<PremioDTO> executa(Cliente cliente) {
         return cliente.getProgresso().getPremiosRecebidos().stream()
                 .map(premio -> PremioDTO.builder()
                         .nomePremio(premio.getPremio().getNomePremio())

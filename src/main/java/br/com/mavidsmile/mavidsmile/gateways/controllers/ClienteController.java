@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ClienteController {
 
-    private final AdicionarRegistroProgresso adicionarRegistroProgresso;
+
     private final ExibiClienteDTO exibiClienteDTO;
     private final BuscarClientes buscarClientes;
     private final ClienteRepository clienteRepository;

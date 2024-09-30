@@ -7,5 +7,5 @@ import java.util.List;
 
 @Service
 public interface OrdenarListaPorPontos {
-    List<ClienteRankingResponseDTO> execute(List<ClienteRankingResponseDTO> rankingDeClientes);
+    List<ClienteRankingResponseDTO> executa(List<ClienteRankingResponseDTO> rankingDeClientes);
 }

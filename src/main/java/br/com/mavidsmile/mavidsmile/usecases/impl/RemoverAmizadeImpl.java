@@ -17,7 +17,7 @@ public class RemoverAmizadeImpl implements RemoverAmizade {
     private final AmigosRepository amigosRepository;
 
     @Override
-    public void execute(String clienteId, String amigoId) {
+    public void executa(String clienteId, String amigoId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
 

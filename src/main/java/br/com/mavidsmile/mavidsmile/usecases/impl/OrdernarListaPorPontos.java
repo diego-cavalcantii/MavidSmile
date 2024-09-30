@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Service
 public class OrdernarListaPorPontos implements OrdenarListaPorPontos {
     @Override
-    public List<ClienteRankingResponseDTO> execute(List<ClienteRankingResponseDTO> rankingDeClientes) {
+    public List<ClienteRankingResponseDTO> executa(List<ClienteRankingResponseDTO> rankingDeClientes) {
         rankingDeClientes = rankingDeClientes.stream()
                 .sorted(Comparator.comparingInt(ClienteRankingResponseDTO::getPontos).reversed())
                 .collect(Collectors.toList());

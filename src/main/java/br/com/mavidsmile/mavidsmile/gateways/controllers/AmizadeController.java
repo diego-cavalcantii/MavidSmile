@@ -1,5 +1,6 @@
 package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
+
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmizadeNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmigoRequestDTO;
@@ -47,7 +48,7 @@ public class AmizadeController {
     @PostMapping("/adicionar")
     public ResponseEntity<String> adicionarUmAmigo(@RequestBody @Valid AdicionarAmigoRequestDTO requestDTO) {
 
-        adicionarAmizade.adicionarAmigo(requestDTO);
+        adicionarAmizade.executa(requestDTO);
 
         return ResponseEntity.ok("Amigo adicionado com sucesso");
     }
@@ -69,7 +70,7 @@ public class AmizadeController {
 
         listaDeAmigos.add(exibiClienteDTO.transformarClienteRankingDTO(cliente));
 
-        List<ClienteRankingResponseDTO> listaDeaAmigosOrdenadosPorPontos = ordenarListaPorPontos.execute(listaDeAmigos);
+        List<ClienteRankingResponseDTO> listaDeaAmigosOrdenadosPorPontos = ordenarListaPorPontos.executa(listaDeAmigos);
 
 
         return  ResponseEntity.ok(listaDeaAmigosOrdenadosPorPontos);
@@ -79,7 +80,7 @@ public class AmizadeController {
     @DeleteMapping("/remover/{clienteId}/{amigoId}")
     public ResponseEntity<String> removerAmizade(@PathVariable String clienteId, @PathVariable String amigoId) {
 
-        removerAmizade.execute(clienteId, amigoId);
+        removerAmizade.executa(clienteId, amigoId);
 
         return ResponseEntity.ok("Amizade removida com sucesso");
     }

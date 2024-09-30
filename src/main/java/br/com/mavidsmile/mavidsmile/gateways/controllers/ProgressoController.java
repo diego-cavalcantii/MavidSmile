@@ -55,7 +55,7 @@ public class ProgressoController {
     @PostMapping("/adicionar-registro/{clienteId}")
     public ResponseEntity<String> adicionarRegistroDeUmCliente(@PathVariable @Valid String clienteId) {
 
-        adicionarRegistroProgresso.adicionarRegistro(clienteId);
+        adicionarRegistroProgresso.executa(clienteId);
 
         return ResponseEntity.ok("Registro adicionado com sucesso");
 
