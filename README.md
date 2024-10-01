@@ -7,6 +7,19 @@
 - **RM553483 - Vitor de Melo** - Responsável pelos diagramas e o banco
 
 ## Instruções de Como Rodar a Aplicação
+A aplicação foi desenvolvida utilizando  o MySQL como banco de dados padrão. Para rodar a aplicação, siga os seguintes passos:
+
+**Configurar o Banco de Dados:**
+
+- Certifique-se de que o MySQL está instalado e em execução na sua máquina.
+- Crie um banco de dados chamado **mavidsmile** no MySQL.
+- Configure as credenciais do banco de dados no arquivo de configuração da aplicação, que está localizado em **src/main/resources/application.yml**.
+- Com o banco de dados configurado, basta rodar a aplicação localmente.
+
+**Utilizar Outro Banco de Dados (opcional):**
+
+- Se preferir utilizar outro banco de dados, como PostgreSQL ou H2, você pode alterar as credenciais e a URL de conexão no arquivo de configuração **(application.properties ou application.yml)** de acordo com o banco de dados escolhido.
+
 
 **INSERTS DO BANCO DE DADOS**
 
