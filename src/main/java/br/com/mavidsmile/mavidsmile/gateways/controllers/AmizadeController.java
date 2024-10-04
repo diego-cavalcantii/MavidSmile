@@ -9,6 +9,7 @@ import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,12 +46,13 @@ public class AmizadeController {
         return ResponseEntity.ok(amigosDTO);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/adicionar")
     public ResponseEntity<String> adicionarUmAmigo(@RequestBody @Valid AdicionarAmigoRequestDTO requestDTO) {
 
         adicionarAmizade.executa(requestDTO);
 
-        return ResponseEntity.ok("Amigo adicionado com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Amizade adicionada com sucesso");
     }
 
     @GetMapping("/ranking/{clienteId}")

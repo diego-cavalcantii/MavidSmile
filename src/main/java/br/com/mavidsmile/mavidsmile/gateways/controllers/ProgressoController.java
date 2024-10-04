@@ -13,6 +13,7 @@ import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiClienteDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +43,6 @@ public class ProgressoController {
         return ResponseEntity.ok(clientesDTO);
     }
 
-    @ResponseStatus
     @GetMapping("{clienteId}")
     public ResponseEntity<ClienteProgressoResponseDTO> exibiProgressoDeUmCliente (@PathVariable String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
@@ -56,12 +56,13 @@ public class ProgressoController {
     }
 
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/adicionar-registro/{clienteId}")
     public ResponseEntity<String> adicionarRegistroDeUmCliente(@PathVariable @Valid String clienteId) {
 
         adicionarRegistroProgresso.executa(clienteId);
 
-        return ResponseEntity.ok("Registro adicionado com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Registro de progresso adicionado com sucesso");
 
     }
 
