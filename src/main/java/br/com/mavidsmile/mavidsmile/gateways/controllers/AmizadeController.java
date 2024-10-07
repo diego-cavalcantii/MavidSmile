@@ -3,7 +3,8 @@ package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmizadeNotFoundException;
-import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmigoRequestDTO;
+import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmizadeRequestDTO;
+import br.com.mavidsmile.mavidsmile.gateways.response.ClienteAmizadeResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.*;
@@ -29,17 +30,17 @@ public class AmizadeController {
     private final RemoverAmizade removerAmizade;
 
     @GetMapping("/{clienteId}")
-    public ResponseEntity<List<ClienteResponseDTO>> exibiOsAmigosDeUmCliente(@PathVariable String clienteId) {
+    public ResponseEntity<List<ClienteAmizadeResponseDTO>> exibiOsAmigosDeUmCliente(@PathVariable String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
         if(cliente.getAmigos().isEmpty()) {
             throw new AmizadeNotFoundException("Nenhum amigo encontrado");
         }
 
-        List<ClienteResponseDTO> amigosDTO = cliente.getAmigos().stream()
+        List<ClienteAmizadeResponseDTO> amigosDTO = cliente.getAmigos().stream()
                 .map(amigo -> {
                     Cliente amigoCliente = amigo.getClienteIdEhAmigo();
-                    return exibiClienteDTO.transformarClienteGetDTO(amigoCliente);
+                    return exibiClienteDTO.transformarClienteAmizadeDTO(amigoCliente);
                 })
                 .toList();
 
@@ -48,7 +49,7 @@ public class AmizadeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/adicionar")
-    public ResponseEntity<String> adicionarUmAmigo(@RequestBody @Valid AdicionarAmigoRequestDTO requestDTO) {
+    public ResponseEntity<String> adicionarUmAmigo(@RequestBody @Valid AdicionarAmizadeRequestDTO requestDTO) {
 
         adicionarAmizade.executa(requestDTO);
 

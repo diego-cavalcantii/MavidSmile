@@ -18,8 +18,7 @@ public class ExibirListaPremiosImpl implements ExibiListaPremios {
                 .map(premio -> PremioResponseDTO.builder()
                         .nomePremio(premio.getPremio().getNomePremio())
                         .descricaoPremio(premio.getPremio().getDescricaoPremio())
-//                        .fotosNecessarias(String.valueOf(premio.getPremio().getFotosNecessarias()))
                         .build())
-                .collect(Collectors.toList());
+                .toList();
     }
 }

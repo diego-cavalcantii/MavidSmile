@@ -3,6 +3,7 @@ package br.com.mavidsmile.mavidsmile.domains;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,10 +39,10 @@ public class Cliente {
     private String nomeCompleto;
 
     @NotBlank
-    @Size(min = 3, max = 100)
+    @Size(min = 10, max = 100)
     private String email;
 
     @NotBlank
-    @Size(min = 3, max = 100)
+    @Size(min = 5, max = 100)
     private String endereco;
 }

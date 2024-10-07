@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 @Valid
-public record AdicionarAmigoRequestDTO(
+public record AdicionarAmizadeRequestDTO(
         @NotNull  String clienteIdTemAmigo,
         @NotNull  String clienteIdEhAmigo) {
 
