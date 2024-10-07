@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,20 +32,22 @@ public class AtualizarNivelClienteImpl implements AtualizarNivelCliente {
 
         Progresso progresso = cliente.getProgresso();
 
-        List<Nivel> niveis = nivelRepository.findAll();
-        for (Nivel nivel : niveis) {
-            if(progresso.getPontos() == nivel.getPontosNecessarios()) {
-                cliente.setNivel(nivel);
-                clienteRepository.save(cliente);
+        Optional<Nivel> nivelOpt = nivelRepository.findByPontosNecessarios(progresso.getPontos());
+
+        if (nivelOpt.isPresent()) {
+            Nivel nivel = nivelOpt.get();
+
+            cliente.setNivel(nivel);
+            clienteRepository.save(cliente);
 
 
-                ProgressoPremio progressoPremio = ProgressoPremio.builder()
-                        .progresso(progresso)
-                        .premio(nivel.getPremio())
-                        .build();
-                progressoPremioRepository.save(progressoPremio);
-                enviarNotificacao.nivelAtualizado(clienteId);
-            }
+            ProgressoPremio progressoPremio = ProgressoPremio.builder()
+                    .progresso(progresso)
+                    .premio(nivel.getPremio())
+                    .build();
+            progressoPremioRepository.save(progressoPremio);
+
+            enviarNotificacao.nivelAtualizado(clienteId);
         }
 
     }

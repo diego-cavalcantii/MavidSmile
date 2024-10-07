@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -25,29 +26,31 @@ public class EnviarNotificacaoImpl implements EnviarNotificacao {
     @Override
     public Notificacao nivelAtualizado(String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
-        String[] nomeSplitado = cliente.getNomeCompleto().split(" ");
-        String primeiroNome = nomeSplitado[0];
-        String ultimoNome = nomeSplitado[nomeSplitado.length - 1];
 
+        Nivel nivel = nivelRepository.findByNomeNivel(cliente.getNivel().getNomeNivel());
 
-        List<Nivel> niveis = nivelRepository.findAll();
+        if(nivel != null){
+            String mensagem = gerarMensagem(cliente, nivel);
 
-        for (Nivel nivel : niveis) {
-            if(cliente.getNivel().equals(nivel)){
+            Notificacao nivelAtualizado =  Notificacao.builder()
+                    .cliente(cliente)
+                    .mensagem(mensagem)
+                    .tipo("Nivel Atualizado")
+                    .build();
 
-               Notificacao nivelAtualizado =  Notificacao.builder()
-                        .cliente(cliente)
-                        .mensagem("Parabéns " + primeiroNome + " " + ultimoNome + " você atingiu o nível " + nivel.getNomeNivel())
-                        .tipo("Nivel Atualizado")
-                        .build();
+            notificacaoRepository.save(nivelAtualizado);
 
+            return nivelAtualizado;
 
-               notificacaoRepository.save(nivelAtualizado);
-
-               return nivelAtualizado;
-            }
         }
 
         return null;
+    }
+
+    private String gerarMensagem(Cliente cliente, Nivel nivel) {
+        String[] nomeSplitado = cliente.getNomeCompleto().split(" ");
+        String primeiroNome = nomeSplitado[0];
+        String ultimoNome = nomeSplitado[nomeSplitado.length - 1];
+        return "Parabéns " + primeiroNome + " " + ultimoNome + ", você atingiu o nível " + nivel.getNomeNivel() + "!";
     }
 }

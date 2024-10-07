@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface NivelRepository extends JpaRepository<Nivel, String> {
 
     Optional<Nivel> findByPontosNecessarios(int pontosNecessarios);
+
+    Nivel findByNomeNivel(String nomeNivel);
 }
