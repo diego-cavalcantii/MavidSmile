@@ -4,13 +4,12 @@ import br.com.mavidsmile.mavidsmile.domains.*;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
-import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiClienteDTO;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.ConverteClienteEmDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
 public class ClienteController {
 
 
-    private final ExibiClienteDTO exibiClienteDTO;
+    private final ConverteClienteEmDTO converteClienteEmDTO;
     private final BuscarClientes buscarClientes;
     private final ClienteRepository clienteRepository;
 
@@ -29,7 +28,7 @@ public class ClienteController {
         List<Cliente> clientes = buscarClientes.buscarTodos();
 
         List<ClienteResponseDTO> clientesDTO = clientes.stream()
-                .map(exibiClienteDTO::transformarClienteGetDTO)
+                .map(converteClienteEmDTO::ClienteResponseDTO)
                 .toList();
 
         return ResponseEntity.ok(clientesDTO);
@@ -39,7 +38,7 @@ public class ClienteController {
     public ResponseEntity<ClienteResponseDTO> exibiUmCliente(@PathVariable String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
-        ClienteResponseDTO clienteDTO = exibiClienteDTO.transformarClienteGetDTO(cliente);
+        ClienteResponseDTO clienteDTO = converteClienteEmDTO.ClienteResponseDTO(cliente);
 
         return ResponseEntity.ok(clienteDTO);
     }

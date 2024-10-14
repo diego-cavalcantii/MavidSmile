@@ -22,8 +22,7 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
     private final EnviarNotificacao enviarNotificacao;
 
     @Override
-    public void executa(String clienteId) {
-        Cliente cliente = buscarClientes.buscarPorId(clienteId);// Encontra o cliente
+    public void executa(Cliente cliente) {
 
         if(cliente.getProgresso() != null) {
             Progresso progressoCliente = cliente.getProgresso();// Pega o progresso do cliente
@@ -38,10 +37,6 @@ public class AdicionarRegistroProgressoImpl implements AdicionarRegistroProgress
             cliente.setProgresso(novoProgresso);// Associa o progresso ao cliente
             clienteRepository.save(cliente);// Salva o cliente no banco de dados
         }
-
-        atualizarNivelCliente.executa(clienteId);
-
-
 
     }
 }

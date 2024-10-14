@@ -17,16 +17,11 @@ public class RemoverAmizadeImpl implements RemoverAmizade {
     private final AmizadeRepository amizadeRepository;
 
     @Override
-    public void executa(String clienteId, String amigoId) {
-        Cliente cliente = buscarClientes.buscarPorId(clienteId);
-
-        Cliente amigo = buscarClientes.buscarPorId(amigoId);
+    public void executa(Cliente cliente, Cliente amigo) {
 
         Amizade amizade = amizadeRepository
                 .findByClienteIdTemAmigoAndClienteIdEhAmigo(cliente, amigo)
                 .orElseThrow(() -> new AmizadeNotFoundException("Amizade não encontrada"));
-
-
 
         cliente.getAmigos().remove(amizade);
         amizadeRepository.delete(amizade);

@@ -8,6 +8,7 @@ import br.com.mavidsmile.mavidsmile.gateways.response.AmizadeResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteAmizadeResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.AdicionarAmizade;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.ConverteClienteEmDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class AdicionarAmizadeImpl implements AdicionarAmizade {
 
     private final AmizadeRepository amizadeRepository;
     private final BuscarClientes buscarClientes;
+    private final ConverteClienteEmDTO converteClienteEmDTO;
 
     @Override
     public AmizadeResponseDTO executa(Cliente cliente, Cliente amigo) {
@@ -40,19 +42,9 @@ public class AdicionarAmizadeImpl implements AdicionarAmizade {
         amizadeRepository.save(novoAmigo);
 //        return novoAmigo;
 
-        ClienteAmizadeResponseDTO clienteResponseDTO = ClienteAmizadeResponseDTO.builder()
-                .nomeCompleto(cliente.getNomeCompleto())
-                .email(cliente.getEmail())
-                .pontos(cliente.getProgresso() != null ? cliente.getProgresso().getPontos() : 0)
-                .nomeNivel(cliente.getNivel() != null ? cliente.getNivel().getNomeNivel() : "Nível não definido")
-                .build();
+        ClienteAmizadeResponseDTO clienteResponseDTO = converteClienteEmDTO.ClienteAmizadeDTO(cliente);
 
-        ClienteAmizadeResponseDTO amigoResponseDTO = ClienteAmizadeResponseDTO.builder()
-                .nomeCompleto(amigo.getNomeCompleto())
-                .email(amigo.getEmail())
-                .pontos(amigo.getProgresso() != null ? amigo.getProgresso().getPontos() : 0)
-                .nomeNivel(amigo.getNivel() != null ? amigo.getNivel().getNomeNivel() : "Nível não definido")
-                .build();
+        ClienteAmizadeResponseDTO amigoResponseDTO = converteClienteEmDTO.ClienteAmizadeDTO(amigo);
 
         return AmizadeResponseDTO.builder()
                 .clienteTemAmigo(clienteResponseDTO)

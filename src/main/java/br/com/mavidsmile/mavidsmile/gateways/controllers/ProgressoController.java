@@ -1,17 +1,16 @@
 package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
+import br.com.mavidsmile.mavidsmile.domains.Nivel;
 import br.com.mavidsmile.mavidsmile.domains.Notificacao;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.ClienteNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.ProgressoNotFoundException;
-import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
+import br.com.mavidsmile.mavidsmile.gateways.repositories.NivelRepository;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.NotificacaoRepository;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteProgressoResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.NotificacaoResponseDTO;
-import br.com.mavidsmile.mavidsmile.usecases.interfaces.AdicionarRegistroProgresso;
-import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarClientes;
-import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiClienteDTO;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/progresso")
@@ -27,9 +26,12 @@ import java.util.stream.Collectors;
 public class ProgressoController {
 
     private final AdicionarRegistroProgresso adicionarRegistroProgresso;
-    private final ExibiClienteDTO exibiClienteDTO;
+    private final ConverteClienteEmDTO converteClienteEmDTO;
     private final BuscarClientes buscarClientes;
     private final NotificacaoRepository notificacaoRepository;
+    private final NivelRepository nivelRepository;
+    private final EnviarNotificacao enviarNotificacao;
+    private final AtualizarNivelCliente atualizarNivelCliente;
 
 
     @GetMapping()
@@ -42,7 +44,7 @@ public class ProgressoController {
         }
 
         List<ClienteRankingResponseDTO> clientesDTO = amigosCliente.stream()
-                .map(exibiClienteDTO::transformarClienteRankingDTO)
+                .map(converteClienteEmDTO::ClienteRankingDTO)
                 .toList();
 
         return ResponseEntity.ok(clientesDTO);
@@ -56,7 +58,7 @@ public class ProgressoController {
             throw new ProgressoNotFoundException("Progresso do cliente com ID " + clienteId + " não encontrado");
         }
 
-        ClienteProgressoResponseDTO clienteProgressoDTO = exibiClienteDTO.transformarClienteProgressoDTO(cliente);
+        ClienteProgressoResponseDTO clienteProgressoDTO = converteClienteEmDTO.ClienteProgressoDTO(cliente);
         return ResponseEntity.ok(clienteProgressoDTO);
     }
 
@@ -64,10 +66,22 @@ public class ProgressoController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/adicionar-registro/{clienteId}")
     public ResponseEntity<String> adicionarRegistroDeUmCliente(@PathVariable @Valid String clienteId) {
+        Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
-        adicionarRegistroProgresso.executa(clienteId);
+        adicionarRegistroProgresso.executa(cliente);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Registro de progresso adicionado com sucesso");
+        Optional<Nivel> nivelOpt = nivelRepository.findByPontosNecessarios(cliente.getProgresso().getPontos());
+
+        if(nivelOpt.isPresent()){
+            Nivel nivel = nivelOpt.get();
+
+            atualizarNivelCliente.executa(cliente,nivel);
+            Notificacao notificacao = enviarNotificacao.nivelAtualizado(cliente);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(notificacao.getMensagem());
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Registro adicionado com sucesso");
 
     }
 

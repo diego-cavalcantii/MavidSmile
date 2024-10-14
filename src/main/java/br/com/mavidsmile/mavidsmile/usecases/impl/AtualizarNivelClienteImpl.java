@@ -27,15 +27,9 @@ public class AtualizarNivelClienteImpl implements AtualizarNivelCliente {
     private final EnviarNotificacao enviarNotificacao;
 
     @Override
-    public void executa(String clienteId) {
-        Cliente cliente = buscarClientes.buscarPorId(clienteId);
+    public void executa(Cliente cliente, Nivel nivel) {
 
         Progresso progresso = cliente.getProgresso();
-
-        Optional<Nivel> nivelOpt = nivelRepository.findByPontosNecessarios(progresso.getPontos());
-
-        if (nivelOpt.isPresent()) {
-            Nivel nivel = nivelOpt.get();
 
             cliente.setNivel(nivel);
             clienteRepository.save(cliente);
@@ -46,9 +40,6 @@ public class AtualizarNivelClienteImpl implements AtualizarNivelCliente {
                     .premio(nivel.getPremio())
                     .build();
             progressoPremioRepository.save(progressoPremio);
-
-            enviarNotificacao.nivelAtualizado(clienteId);
-        }
 
     }
 }

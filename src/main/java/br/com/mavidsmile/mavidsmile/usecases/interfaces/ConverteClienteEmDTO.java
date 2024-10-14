@@ -6,12 +6,12 @@ import br.com.mavidsmile.mavidsmile.gateways.response.ClienteResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteProgressoResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
 
-public interface ExibiClienteDTO {
-    ClienteResponseDTO transformarClienteGetDTO(Cliente cliente);
+public interface ConverteClienteEmDTO {
+    ClienteResponseDTO ClienteResponseDTO(Cliente cliente);
 
-    ClienteProgressoResponseDTO transformarClienteProgressoDTO(Cliente cliente);
+    ClienteProgressoResponseDTO ClienteProgressoDTO(Cliente cliente);
 
-    ClienteRankingResponseDTO transformarClienteRankingDTO(Cliente cliente);
+    ClienteRankingResponseDTO ClienteRankingDTO(Cliente cliente);
 
-    ClienteAmizadeResponseDTO transformarClienteAmizadeDTO(Cliente cliente);
+    ClienteAmizadeResponseDTO ClienteAmizadeDTO(Cliente cliente);
 }

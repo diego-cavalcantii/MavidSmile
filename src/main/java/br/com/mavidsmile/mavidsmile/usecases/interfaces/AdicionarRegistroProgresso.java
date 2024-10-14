@@ -1,5 +1,7 @@
 package br.com.mavidsmile.mavidsmile.usecases.interfaces;
 
+import br.com.mavidsmile.mavidsmile.domains.Cliente;
+
 public interface AdicionarRegistroProgresso {
-    void executa(String clienteId);
+    void executa(Cliente cliente);
 }

@@ -1,6 +1,5 @@
 package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
-import br.com.mavidsmile.mavidsmile.domains.Amizade;
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmizadeNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmizadeRequestDTO;
@@ -11,7 +10,6 @@ import br.com.mavidsmile.mavidsmile.usecases.interfaces.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Links;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +27,7 @@ public class AmizadeController {
 
     private final AdicionarAmizade adicionarAmizade;
     private final BuscarClientes buscarClientes;
-    private final ExibiClienteDTO exibiClienteDTO;
+    private final ConverteClienteEmDTO converteClienteEmDTO;
     private final OrdenarListaPorPontos ordenarListaPorPontos;
     private final RemoverAmizade removerAmizade;
 
@@ -44,7 +42,7 @@ public class AmizadeController {
         List<ClienteAmizadeResponseDTO> amigosDTO = cliente.getAmigos().stream()
                 .map(amigo -> {
                     Cliente amigoCliente = amigo.getClienteIdEhAmigo();
-                    return exibiClienteDTO.transformarClienteAmizadeDTO(amigoCliente);
+                    return converteClienteEmDTO.ClienteAmizadeDTO(amigoCliente);
                 })
                 .toList();
 
@@ -76,15 +74,18 @@ public class AmizadeController {
             throw new AmizadeNotFoundException("Nenhum amigo encontrado");
         }
 
+        // Captura a lista de amigos do cliente e converte em DTO
         List<ClienteRankingResponseDTO> listaDeAmigos = cliente.getAmigos().stream()
                 .map(amigo -> {
                     Cliente amigoCliente = amigo.getClienteIdEhAmigo();
-                    return exibiClienteDTO.transformarClienteRankingDTO(amigoCliente);
+                    return converteClienteEmDTO.ClienteRankingDTO(amigoCliente);
                 })
                 .collect(Collectors.toList());
 
-        listaDeAmigos.add(exibiClienteDTO.transformarClienteRankingDTO(cliente));
+        // Adiciona o cliente na lista de amigos
+        listaDeAmigos.add(converteClienteEmDTO.ClienteRankingDTO(cliente));
 
+        // Ordena a lista de amigos por pontos
         List<ClienteRankingResponseDTO> listaDeaAmigosOrdenadosPorPontos = ordenarListaPorPontos.executa(listaDeAmigos);
 
 
@@ -94,8 +95,10 @@ public class AmizadeController {
 
     @DeleteMapping("/remover/{clienteId}/{amigoId}")
     public ResponseEntity<String> removerAmizade(@PathVariable String clienteId, @PathVariable String amigoId) {
+        Cliente cliente = buscarClientes.buscarPorId(clienteId);
+        Cliente amigo = buscarClientes.buscarPorId(amigoId);
 
-        removerAmizade.executa(clienteId, amigoId);
+        removerAmizade.executa(cliente, amigo);
 
         return ResponseEntity.ok("Amizade removida com sucesso");
     }

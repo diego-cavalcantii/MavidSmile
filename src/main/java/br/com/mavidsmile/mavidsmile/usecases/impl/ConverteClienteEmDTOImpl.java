@@ -5,7 +5,7 @@ import br.com.mavidsmile.mavidsmile.gateways.response.ClienteAmizadeResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteProgressoResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
-import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiClienteDTO;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.ConverteClienteEmDTO;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.ExibiListaPremios;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,13 +14,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ExibiClienteDTOImpl implements ExibiClienteDTO {
+public class ConverteClienteEmDTOImpl implements ConverteClienteEmDTO {
 
     private final ExibiListaPremios exibiListaPremios;
 
 
     @Override
-    public ClienteResponseDTO transformarClienteGetDTO(Cliente cliente) {
+    public ClienteResponseDTO ClienteResponseDTO(Cliente cliente) {
         return ClienteResponseDTO.builder()
                 .nomeCompleto(cliente.getNomeCompleto())
                 .email(cliente.getEmail())
@@ -32,7 +32,7 @@ public class ExibiClienteDTOImpl implements ExibiClienteDTO {
     }
 
     @Override
-    public ClienteProgressoResponseDTO transformarClienteProgressoDTO(Cliente cliente) {
+    public ClienteProgressoResponseDTO ClienteProgressoDTO(Cliente cliente) {
         return  ClienteProgressoResponseDTO.builder()
                 .nomeCompleto(cliente.getNomeCompleto())
                 .registros(String.valueOf(cliente.getProgresso().getRegistros()))
@@ -42,7 +42,7 @@ public class ExibiClienteDTOImpl implements ExibiClienteDTO {
     }
 
     @Override
-    public ClienteRankingResponseDTO transformarClienteRankingDTO(Cliente cliente) {
+    public ClienteRankingResponseDTO ClienteRankingDTO(Cliente cliente) {
         return ClienteRankingResponseDTO.builder()
                 .nomeCompleto(cliente.getNomeCompleto())
                 .pontos(cliente.getProgresso() != null ? cliente.getProgresso().getPontos() : 0)
@@ -51,7 +51,7 @@ public class ExibiClienteDTOImpl implements ExibiClienteDTO {
     }
 
     @Override
-    public ClienteAmizadeResponseDTO transformarClienteAmizadeDTO(Cliente cliente) {
+    public ClienteAmizadeResponseDTO ClienteAmizadeDTO(Cliente cliente) {
         return ClienteAmizadeResponseDTO.builder()
                 .nomeCompleto(cliente.getNomeCompleto())
                 .email(cliente.getEmail())

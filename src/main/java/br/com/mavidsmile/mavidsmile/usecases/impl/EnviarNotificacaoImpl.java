@@ -24,8 +24,7 @@ public class EnviarNotificacaoImpl implements EnviarNotificacao {
 
 
     @Override
-    public Notificacao nivelAtualizado(String clienteId) {
-        Cliente cliente = buscarClientes.buscarPorId(clienteId);
+    public Notificacao nivelAtualizado(Cliente cliente) {
 
         Nivel nivel = nivelRepository.findByNomeNivel(cliente.getNivel().getNomeNivel());
 
