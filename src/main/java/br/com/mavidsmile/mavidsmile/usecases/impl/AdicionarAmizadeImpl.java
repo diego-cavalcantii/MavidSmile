@@ -19,24 +19,21 @@ public class AdicionarAmizadeImpl implements AdicionarAmizade {
     private final BuscarClientes buscarClientes;
 
     @Override
-    public void executa(AdicionarAmizadeRequestDTO requestDTO) {
-        Cliente clienteTemAmigo = buscarClientes.buscarPorId(requestDTO.clienteIdTemAmigo());
+    public void executa(Cliente cliente, Cliente amigo) {
 
-        Cliente clienteEhAmigo = buscarClientes.buscarPorId(requestDTO.clienteIdEhAmigo());
-
-        if(clienteTemAmigo.equals(clienteEhAmigo)) {
+        if(cliente.equals(amigo)) {
             throw new AmizadeNotFoundException("Não é possível adicionar você mesmo como amigo");
         }
 
-        boolean amizadeExistente = amizadeRepository.existsByClienteIdTemAmigoAndClienteIdEhAmigo(clienteTemAmigo, clienteEhAmigo);
+        boolean amizadeExistente = amizadeRepository.existsByClienteIdTemAmigoAndClienteIdEhAmigo(cliente, amigo);
 
         if (amizadeExistente) {
             throw new AmizadeNotFoundException("Amizade já existe entre os clientes");
         }
 
         Amizade novoAmigo = Amizade.builder()
-                .clienteIdTemAmigo(clienteTemAmigo)
-                .clienteIdEhAmigo(clienteEhAmigo)
+                .clienteIdTemAmigo(cliente)
+                .clienteIdEhAmigo(amigo)
                 .build();
 
         amizadeRepository.save(novoAmigo);
