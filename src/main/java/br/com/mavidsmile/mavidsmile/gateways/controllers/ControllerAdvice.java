@@ -1,9 +1,6 @@
 package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
-import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmizadeMethodArgumentNotValidException;
-import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmizadeNotFoundException;
-import br.com.mavidsmile.mavidsmile.gateways.exceptions.ClienteNotFoundException;
-import br.com.mavidsmile.mavidsmile.gateways.exceptions.ProgressoNotFoundException;
+import br.com.mavidsmile.mavidsmile.gateways.exceptions.*;
 import org.hibernate.PropertyValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +23,11 @@ public class ControllerAdvice {
 
     @ExceptionHandler(ProgressoNotFoundException.class)
     public ResponseEntity<String> trataProgressoNotFoundException(ProgressoNotFoundException ex, WebRequest request) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(NotificacaoNotFoundException.class)
+    public ResponseEntity<String> trataNotificacaoNotFoundException(NotificacaoNotFoundException ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 

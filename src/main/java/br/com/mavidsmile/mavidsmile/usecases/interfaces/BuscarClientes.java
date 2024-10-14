@@ -1,5 +1,6 @@
 package br.com.mavidsmile.mavidsmile.usecases.interfaces;
 
+import br.com.mavidsmile.mavidsmile.domains.Amizade;
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 
 import java.util.List;
@@ -10,4 +11,7 @@ public interface BuscarClientes {
     Cliente buscarPorId(String clienteId);
 
     List<Cliente> buscarClientesPorRankingDePontos();
+
+    List<Amizade> buscarAmigosDeUmCliente(Cliente cliente);
+
 }

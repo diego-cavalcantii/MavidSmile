@@ -39,10 +39,6 @@ public class ProgressoController {
 
         List<Cliente> amigosCliente = buscarClientes.buscarClientesPorRankingDePontos();
 
-        if(amigosCliente.isEmpty()){
-            throw new ClienteNotFoundException("Nenhum cliente encontrado");
-        }
-
         List<ClienteRankingResponseDTO> clientesDTO = amigosCliente.stream()
                 .map(converteClienteEmDTO::ClienteRankingDTO)
                 .toList();
@@ -85,18 +81,5 @@ public class ProgressoController {
 
     }
 
-    @GetMapping("/notificacao")
-    public ResponseEntity<List<NotificacaoResponseDTO>> enviarNotificacao() {
 
-        List<Notificacao> notificacaos = notificacaoRepository.findAll();
-
-        List<NotificacaoResponseDTO> notificacoesResponseDTOS = notificacaos.stream()
-                .map(notificacao -> NotificacaoResponseDTO.builder()
-                        .mensagem(notificacao.getMensagem())
-                        .tipo(notificacao.getTipo())
-                        .build())
-                .toList();
-
-        return ResponseEntity.ok(notificacoesResponseDTOS);
-    }
 }

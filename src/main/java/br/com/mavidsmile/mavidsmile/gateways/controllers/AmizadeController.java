@@ -35,11 +35,7 @@ public class AmizadeController {
     public ResponseEntity<List<ClienteAmizadeResponseDTO>> exibiOsAmigosDeUmCliente(@PathVariable String clienteId) {
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
-        if(cliente.getAmigos().isEmpty()) {
-            throw new AmizadeNotFoundException("Nenhum amigo encontrado");
-        }
-
-        List<ClienteAmizadeResponseDTO> amigosDTO = cliente.getAmigos().stream()
+        List<ClienteAmizadeResponseDTO> amigosDTO = buscarClientes.buscarAmigosDeUmCliente(cliente).stream()
                 .map(amigo -> {
                     Cliente amigoCliente = amigo.getClienteIdEhAmigo();
                     return converteClienteEmDTO.ClienteAmizadeDTO(amigoCliente);
@@ -70,12 +66,8 @@ public class AmizadeController {
     public ResponseEntity<List<ClienteRankingResponseDTO>> exibirRankingDeAmigos(@PathVariable String clienteId){
         Cliente cliente = buscarClientes.buscarPorId(clienteId);
 
-        if(cliente.getAmigos().isEmpty()) {
-            throw new AmizadeNotFoundException("Nenhum amigo encontrado");
-        }
-
         // Captura a lista de amigos do cliente e converte em DTO
-        List<ClienteRankingResponseDTO> listaDeAmigos = cliente.getAmigos().stream()
+        List<ClienteRankingResponseDTO> listaDeAmigos = buscarClientes.buscarAmigosDeUmCliente(cliente).stream()
                 .map(amigo -> {
                     Cliente amigoCliente = amigo.getClienteIdEhAmigo();
                     return converteClienteEmDTO.ClienteRankingDTO(amigoCliente);

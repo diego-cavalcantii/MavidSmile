@@ -97,7 +97,7 @@ Aqui você deve inserir os dois diagramas.
 - `GET /progresso` - Exibe o ranking do progresso de todos os clientes.
 - `GET /progresso/{clienteId}` - Retorna um o progresso de um cliente especifico por ID.
 
-- ### Amizades
+### Amizades
 - `POST /amizade/adicionar` - Adiciona uma amizade entre um cliente que é amigo e que tem amigo.
 {
     "clienteIdTemAmigo" : clienteId,
@@ -107,7 +107,9 @@ Aqui você deve inserir os dois diagramas.
 - `GET /amizade/ranking/{clienteId}` - Retorna o ranking de progresso dos amigos de um cliente.
 - `DELETE amizade/remover/{clienteId}/{amigoId}` - Remove uma amizade.
 
-
+### Notificacao
+- `GET /notificacao` - Retorna todas as notificações.
+- `GET /notificacao/{clienteId}` - Retorna as notificações de um cliente.
 
 ---
 
