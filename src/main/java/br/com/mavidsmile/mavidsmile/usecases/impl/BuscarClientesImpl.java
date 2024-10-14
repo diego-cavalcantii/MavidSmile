@@ -34,6 +34,7 @@ public class BuscarClientesImpl implements BuscarClientes {
 
     @Override
     public List<Cliente> buscarClientesPorRankingDePontos() {
+
         return clienteRepository.findAllByOrderByProgressoPontosDesc();
     }
 

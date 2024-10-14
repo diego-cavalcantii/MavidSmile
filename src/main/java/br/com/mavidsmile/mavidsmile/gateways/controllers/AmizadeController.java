@@ -49,9 +49,13 @@ public class AmizadeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/adicionar")
-    public ResponseEntity<String> adicionarUmAmigo(@RequestBody @Valid AdicionarAmizadeRequestDTO requestDTO) {
+    public ResponseEntity<String> adicionarUmAmigo(@RequestBody @Valid AdicionarAmizadeRequestDTO requestDTO)
+    {
 
-        adicionarAmizade.executa(requestDTO);
+        Cliente cliente = buscarClientes.buscarPorId(requestDTO.clienteIdTemAmigo());
+        Cliente amigo = buscarClientes.buscarPorId(requestDTO.clienteIdEhAmigo());
+
+        adicionarAmizade.executa(cliente, amigo);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Amizade adicionada com sucesso");
     }

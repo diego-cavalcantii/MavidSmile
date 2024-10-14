@@ -2,6 +2,7 @@ package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 import br.com.mavidsmile.mavidsmile.domains.Notificacao;
+import br.com.mavidsmile.mavidsmile.gateways.exceptions.ClienteNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.ProgressoNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.ClienteRepository;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.NotificacaoRepository;
@@ -30,11 +31,15 @@ public class ProgressoController {
     private final BuscarClientes buscarClientes;
     private final NotificacaoRepository notificacaoRepository;
 
+
     @GetMapping()
     public ResponseEntity<List<ClienteRankingResponseDTO>> exibiRankingGeralDosClientes() {
 
         List<Cliente> amigosCliente = buscarClientes.buscarClientesPorRankingDePontos();
 
+        if(amigosCliente.isEmpty()){
+            throw new ClienteNotFoundException("Nenhum cliente encontrado");
+        }
 
         List<ClienteRankingResponseDTO> clientesDTO = amigosCliente.stream()
                 .map(exibiClienteDTO::transformarClienteRankingDTO)
