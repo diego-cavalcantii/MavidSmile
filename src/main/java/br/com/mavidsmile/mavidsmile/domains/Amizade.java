@@ -7,13 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 @Builder
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Amizade {
+public class Amizade extends RepresentationModel<Amizade> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String amizade;

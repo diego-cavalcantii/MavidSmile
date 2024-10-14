@@ -1,11 +1,12 @@
 package br.com.mavidsmile.mavidsmile.usecases.interfaces;
 
+import br.com.mavidsmile.mavidsmile.domains.Amizade;
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
-import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmizadeRequestDTO;
+import br.com.mavidsmile.mavidsmile.gateways.response.AmizadeResponseDTO;
 import org.springframework.stereotype.Service;
 
 @Service
 
 public interface AdicionarAmizade {
-    void executa(Cliente cliente, Cliente amigo);
+    AmizadeResponseDTO executa(Cliente cliente, Cliente amigo);
 }

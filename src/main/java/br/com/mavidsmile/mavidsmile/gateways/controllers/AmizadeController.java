@@ -1,21 +1,25 @@
 package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
-
+import br.com.mavidsmile.mavidsmile.domains.Amizade;
 import br.com.mavidsmile.mavidsmile.domains.Cliente;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.AmizadeNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.requests.AdicionarAmizadeRequestDTO;
+import br.com.mavidsmile.mavidsmile.gateways.response.AmizadeResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteAmizadeResponseDTO;
-import br.com.mavidsmile.mavidsmile.gateways.response.ClienteResponseDTO;
 import br.com.mavidsmile.mavidsmile.gateways.response.ClienteRankingResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Links;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 
 @RestController
@@ -49,15 +53,19 @@ public class AmizadeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/adicionar")
-    public ResponseEntity<String> adicionarUmAmigo(@RequestBody @Valid AdicionarAmizadeRequestDTO requestDTO)
+    public ResponseEntity<AmizadeResponseDTO> adicionarUmAmigo(@RequestBody @Valid AdicionarAmizadeRequestDTO requestDTO)
     {
 
         Cliente cliente = buscarClientes.buscarPorId(requestDTO.clienteIdTemAmigo());
         Cliente amigo = buscarClientes.buscarPorId(requestDTO.clienteIdEhAmigo());
 
-        adicionarAmizade.executa(cliente, amigo);
+        AmizadeResponseDTO amizade = adicionarAmizade.executa(cliente, amigo);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Amizade adicionada com sucesso");
+        Link link = linkTo(AmizadeController.class).slash(cliente.getIdCliente()).withSelfRel();
+
+        amizade.add(link);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(amizade);
     }
 
     @GetMapping("/ranking/{clienteId}")
