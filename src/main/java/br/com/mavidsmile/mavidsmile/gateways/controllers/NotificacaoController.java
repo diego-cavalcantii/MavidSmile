@@ -21,7 +21,6 @@ import java.util.List;
 @RequestMapping("/notificacao")
 public class NotificacaoController {
 
-    private final NotificacaoRepository notificacaoRepository;
     private final BuscarClientes buscarClientes;
     private final BuscarNotificacao buscarNotificacao;
 

@@ -28,7 +28,6 @@ public class ProgressoController {
     private final AdicionarRegistroProgresso adicionarRegistroProgresso;
     private final ConverteClienteEmDTO converteClienteEmDTO;
     private final BuscarClientes buscarClientes;
-    private final NotificacaoRepository notificacaoRepository;
     private final NivelRepository nivelRepository;
     private final EnviarNotificacao enviarNotificacao;
     private final AtualizarNivelCliente atualizarNivelCliente;
