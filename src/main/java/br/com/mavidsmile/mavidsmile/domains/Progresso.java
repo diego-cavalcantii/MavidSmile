@@ -12,13 +12,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 @Builder
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Progresso {
+public class Progresso extends RepresentationModel<Progresso> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
