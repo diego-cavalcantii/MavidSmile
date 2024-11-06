@@ -12,5 +12,5 @@ public class ClienteProgressoResponseDTO extends RepresentationModel<ClienteProg
     private String nomeCompleto;
     private String registros;
     private String pontos;
-    private List<PremioResponseDTO> premiosRecebidos;
+    private List<PremioClienteResponseDTO> premiosRecebidos;
 }

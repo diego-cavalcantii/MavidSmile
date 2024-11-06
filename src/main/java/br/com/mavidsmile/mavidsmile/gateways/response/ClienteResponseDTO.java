@@ -15,5 +15,5 @@ public class ClienteResponseDTO {
     private String email;
     private String endereco;
     private int pontos;
-    private List<PremioResponseDTO> premiosRecebidos;
+    private List<PremioClienteResponseDTO> premiosRecebidos;
 }

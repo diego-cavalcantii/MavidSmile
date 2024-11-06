@@ -14,6 +14,6 @@ public class ClienteAmizadeResponseDTO {     // ID do cliente amigo
     private String email;
     private String nomeNivel;
     private int pontos;
-    private List<PremioResponseDTO> premiosRecebidos;
+    private List<PremioClienteResponseDTO> premiosRecebidos;
 }
 
