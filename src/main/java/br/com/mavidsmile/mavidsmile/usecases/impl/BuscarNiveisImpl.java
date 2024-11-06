@@ -1,9 +1,11 @@
 package br.com.mavidsmile.mavidsmile.usecases.impl;
 
+import br.com.mavidsmile.mavidsmile.domains.Nivel;
 import br.com.mavidsmile.mavidsmile.domains.Premio;
 import br.com.mavidsmile.mavidsmile.gateways.exceptions.PremioNotFoundException;
+import br.com.mavidsmile.mavidsmile.gateways.repositories.NivelRepository;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.PremioRepository;
-import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarPremios;
+import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarNiveis;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,17 +13,17 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BuscarPremiosImpl implements BuscarPremios {
+public class BuscarNiveisImpl implements BuscarNiveis {
 
-    private final PremioRepository premioRepository;
+    private final NivelRepository nivelRepository;
 
     @Override
-    public List<Premio> buscarTodosOsPremios() {
-        List<Premio> premios = premioRepository.findAll();
-        if (premios.isEmpty()) {
+    public List<Nivel> buscarTodosOsNiveis() {
+        List<Nivel> niveis = nivelRepository.findAll();
+        if (niveis.isEmpty()) {
             throw new PremioNotFoundException("Nenhum premio encontrado");
         }
 
-        return premios;
+        return niveis;
     }
 }
