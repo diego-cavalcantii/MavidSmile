@@ -2,9 +2,7 @@ package br.com.mavidsmile.mavidsmile.gateways.controllers;
 
 
 import br.com.mavidsmile.mavidsmile.domains.Nivel;
-import br.com.mavidsmile.mavidsmile.domains.Premio;
 import br.com.mavidsmile.mavidsmile.gateways.response.NivelResponseDTO;
-import br.com.mavidsmile.mavidsmile.gateways.response.PremioClienteResponseDTO;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarNiveis;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.ConverteNivelEmDTO;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +22,8 @@ public class NivelController {
     private final ConverteNivelEmDTO converteNivelEmDTO;
 
 
-    @GetMapping
-    public ResponseEntity<List<NivelResponseDTO>> exibiTodosOsPremios() {
+    @GetMapping()
+    public ResponseEntity<List<NivelResponseDTO>> exibiTodosOsNiveis() {
         List<Nivel> niveis = buscarNiveis.buscarTodosOsNiveis();
 
         List<NivelResponseDTO> niveisDto = niveis.stream()
