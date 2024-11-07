@@ -27,6 +27,7 @@ public class ConverteClienteEmDTOImpl implements ConverteClienteEmDTO {
                 .endereco(cliente.getEndereco())
                 .nomeNivel(cliente.getNivel() != null ? cliente.getNivel().getNomeNivel() : "Nível não definido")
                 .pontos(cliente.getProgresso() != null ? cliente.getProgresso().getPontos() : 0)
+                .imgSrc(cliente.getImgSrc())
                 .premiosRecebidos(cliente.getProgresso() != null ? exibiListaPremios.executa(cliente) : List.of())
                 .build();
     }
@@ -37,6 +38,7 @@ public class ConverteClienteEmDTOImpl implements ConverteClienteEmDTO {
                 .nomeCompleto(cliente.getNomeCompleto())
                 .registros(String.valueOf(cliente.getProgresso().getRegistros()))
                 .pontos(String.valueOf(cliente.getProgresso().getPontos()))
+                .imgSrc(cliente.getImgSrc())
                 .premiosRecebidos(exibiListaPremios.executa(cliente))
                 .build();
     }
@@ -47,6 +49,7 @@ public class ConverteClienteEmDTOImpl implements ConverteClienteEmDTO {
                 .nomeCompleto(cliente.getNomeCompleto())
                 .pontos(cliente.getProgresso() != null ? cliente.getProgresso().getPontos() : 0)
                 .nomeNivel(cliente.getNivel() != null ? cliente.getNivel().getNomeNivel() : "Nível não definido")
+                .imgSrc(cliente.getImgSrc())
                 .build();
     }
 
@@ -57,6 +60,7 @@ public class ConverteClienteEmDTOImpl implements ConverteClienteEmDTO {
                 .email(cliente.getEmail())
                 .pontos(cliente.getProgresso() != null ? cliente.getProgresso().getPontos() : 0)
                 .nomeNivel(cliente.getNivel() != null ? cliente.getNivel().getNomeNivel() : "Nível não definido")
+                .imgSrc(cliente.getImgSrc())
                 .premiosRecebidos(cliente.getProgresso() != null ? exibiListaPremios.executa(cliente) : List.of())
                 .build();
     }

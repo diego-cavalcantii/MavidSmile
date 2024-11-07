@@ -60,15 +60,15 @@ INSERT INTO `nivel`(`pontos_necessarios`, `id_nivel`, `id_premio`, `nome_nivel`)
 
 -- Clientes
 
-INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`) VALUES ('joao.silva@gmail.com', 'Rua das Flores, 123', 'João Silva', '201');
+INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`,`img_src`) VALUES ('joao.silva@gmail.com', 'Rua das Flores, 123', 'João Silva', '201','https://img.freepik.com/fotos-gratis/retrato-de-homem-branco-isolado_53876-40306.jpg');
 
-INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`) VALUES ('maria.oliveira@gmail.com', 'Avenida Brasil, 456', 'Maria Oliveira', '202');
+INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`,`img_src`) VALUES ('maria.oliveira@gmail.com', 'Avenida Brasil, 456', 'Maria Oliveira', '202','https://img.freepik.com/fotos-gratis/retrato-de-uma-linda-mulher-loira-rosto-sorridente_53876-139732.jpg');
 
-INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`) VALUES ('carlos.santos@gmail.com', 'Rua dos Pinheiros, 789', 'Carlos Santos', '203');
+INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`,`img_src`) VALUES ('carlos.santos@gmail.com', 'Rua dos Pinheiros, 789', 'Carlos Santos', '203','https://img.freepik.com/fotos-gratis/homem-senior-de-close-up-com-cabelos-grisalhos_23-2148783578.jpg');
 
-INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`) VALUES ('ana.costa@gmail.com', 'Travessa do Sol, 101', 'Ana Costa', '204');
+INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`,`img_src`) VALUES ('ana.costa@gmail.com', 'Travessa do Sol, 101', 'Ana Costa', '204','https://img.freepik.com/fotos-gratis/close-up-mulher-morena-olhando-para-a-camera-sobre-cinza_171337-1000.jpg');
 
-INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`) VALUES ('pedro.almeida@gmail.com', 'Alameda das Palmeiras, 202', 'Pedro Almeida', '205');
+INSERT INTO `cliente`(`email`, `endereco`, `nome_completo`, `id_cliente`,`img_src`) VALUES ('pedro.almeida@gmail.com', 'Alameda das Palmeiras, 202', 'Pedro Almeida', '205','https://img.freepik.com/fotos-gratis/cara-de-worldface-british-em-um-fundo-branco_53876-14467.jpg?w=360');
 
 
 ---
@@ -110,6 +110,9 @@ Aqui você deve inserir os dois diagramas.
 ### Notificacao
 - `GET /notificacao` - Retorna todas as notificações.
 - `GET /notificacao/{clienteId}` - Retorna as notificações de um cliente.
+
+### Nivel
+- `GET /nivel` - Retorna todos os níveis.
 
 ---
 

@@ -8,12 +8,13 @@ import java.util.List;
 
 @Data
 @Builder
-@JsonPropertyOrder({"nomeCompleto", "email","endereco","nomeNivel","pontos", "premiosRecebidos", })
+@JsonPropertyOrder({"nomeCompleto", "email","endereco","nomeNivel","pontos","imgSrc", "premiosRecebidos", })
 public class ClienteResponseDTO {
     private String nomeNivel;
     private String nomeCompleto;
     private String email;
     private String endereco;
     private int pontos;
+    private String imgSrc;
     private List<PremioClienteResponseDTO> premiosRecebidos;
 }

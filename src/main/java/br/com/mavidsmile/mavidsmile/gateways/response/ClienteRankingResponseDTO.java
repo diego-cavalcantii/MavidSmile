@@ -9,4 +9,5 @@ public class ClienteRankingResponseDTO {
     private String nomeCompleto;
     private String nomeNivel;
     private int pontos;
+    private String imgSrc;
 }
