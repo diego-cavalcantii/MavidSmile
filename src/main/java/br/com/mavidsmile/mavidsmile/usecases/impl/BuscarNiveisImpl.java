@@ -1,10 +1,8 @@
 package br.com.mavidsmile.mavidsmile.usecases.impl;
 
 import br.com.mavidsmile.mavidsmile.domains.Nivel;
-import br.com.mavidsmile.mavidsmile.domains.Premio;
-import br.com.mavidsmile.mavidsmile.gateways.exceptions.PremioNotFoundException;
+import br.com.mavidsmile.mavidsmile.gateways.exceptions.NivelNotFoundException;
 import br.com.mavidsmile.mavidsmile.gateways.repositories.NivelRepository;
-import br.com.mavidsmile.mavidsmile.gateways.repositories.PremioRepository;
 import br.com.mavidsmile.mavidsmile.usecases.interfaces.BuscarNiveis;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,7 @@ public class BuscarNiveisImpl implements BuscarNiveis {
     public List<Nivel> buscarTodosOsNiveis() {
         List<Nivel> niveis = nivelRepository.findAll();
         if (niveis.isEmpty()) {
-            throw new PremioNotFoundException("Nenhum premio encontrado");
+            throw new NivelNotFoundException("Nenhum nivel encontrado");
         }
 
         return niveis;

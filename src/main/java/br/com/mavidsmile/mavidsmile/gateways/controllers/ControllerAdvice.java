@@ -40,8 +40,8 @@ public class ControllerAdvice {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(PremioNotFoundException.class)
-    public ResponseEntity<String> trataPremiosControllerException(PremioNotFoundException ex) {
+    @ExceptionHandler(NivelNotFoundException.class)
+    public ResponseEntity<String> trataNiveisPControllerException(NivelNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
