@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nomeNivel": { "type": "string" },
+    "nomeCompleto": { "type": "string" },
+    "email": { "type": "string", "format": "email" },
+    "endereco": { "type": "string" },
+    "pontos": { "type": "integer" },
+    "imgSrc": { "type": "string" },
+    "premiosRecebidos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "nomePremio": { "type": "string" },
+          "descricaoPremio": { "type": "string" }
+        },
+        "required": ["nomePremio", "descricaoPremio"]
+      }
+    }
+  },
+  "required": ["nomeNivel", "nomeCompleto", "email", "endereco", "pontos", "imgSrc", "premiosRecebidos"]
+}
