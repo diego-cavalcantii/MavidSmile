@@ -1,19 +1,5 @@
 # API - MavidSmile
 
-## Integrantes do Grupo
-
-- **RM553351 - Diego Cavalcanti** - Responsável pela criação da aplicação
-- **RM553352 - Mateus Galeazi** - Responsável pela documentação
-- **RM553483 - Vitor de Melo** - Responsável pelos diagramas e o banco
-
----
-
-## Link do Vídeo
-
-[Link do vídeo](https://youtu.be/85F0B0n5GAE?si=r_YNsA0rkWxXJNG2)
-
----
-
 ## Instruções de Como Rodar a Aplicação
 A aplicação foi desenvolvida utilizando  o MySQL como banco de dados padrão. Para rodar a aplicação, siga os seguintes passos:
 
