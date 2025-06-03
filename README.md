@@ -100,6 +100,9 @@ Aqui você deve inserir os dois diagramas.
 ### Nivel
 - `GET /nivel` - Retorna todos os níveis.
 
+### Premio Raro
+- `GET /premio-raro` - Retorna todos os prêmios raros.
+
 ---
 
 ## Tecnologias Utilizadas
