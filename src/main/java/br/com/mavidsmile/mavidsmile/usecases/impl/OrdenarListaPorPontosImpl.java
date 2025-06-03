@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class OrdernarListaPorPontos implements OrdenarListaPorPontos {
+public class OrdenarListaPorPontosImpl implements OrdenarListaPorPontos {
     @Override
     public List<ClienteRankingResponseDTO> executa(List<ClienteRankingResponseDTO> rankingDeClientes) {
         rankingDeClientes = rankingDeClientes.stream()
